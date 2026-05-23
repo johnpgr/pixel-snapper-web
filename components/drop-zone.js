@@ -1,4 +1,5 @@
 import { BaseElement } from "./base-element.js";
+import { t } from "../lib/i18n.js";
 
 /**
  * @typedef {HTMLElementEventMap & {
@@ -85,7 +86,7 @@ export class DropZone extends BaseElement {
    */
   clear() {
     if (this.label) {
-      this.label.textContent = "Drop image here";
+      this.label.textContent = t("dropLabel");
     }
     this.classList.remove("has-file");
     if (this.input) {

@@ -3,6 +3,7 @@ import * as wasm from "../lib/wasm.js";
 import * as download from "../lib/download.js";
 import { ControlsPanel } from "./controls-panel.js";
 import { ImageViewport } from "./image-viewport.js";
+import { t } from "../lib/i18n.js";
 
 export class PixelSnapperApp extends BaseElement {
   constructor() {
@@ -75,11 +76,11 @@ export class PixelSnapperApp extends BaseElement {
     if (!this.controlsPanel || !this.imageViewport) return;
 
     if (!file.type.startsWith("image/")) {
-      this.controlsPanel.setStatus("error", "Unsupported file type. Please use PNG or JPEG.");
+      this.controlsPanel.setStatus("error", t("unsupportedFileType"));
       return;
     }
 
-    this.controlsPanel.setStatus("idle", "Loading…");
+    this.controlsPanel.setStatus("idle", t("statusLoading"));
     this.imageViewport.clear();
     this.resultBytes = null;
     this.controlsPanel.setDownloadDisabled(true);
@@ -96,7 +97,7 @@ export class PixelSnapperApp extends BaseElement {
     }
 
     this.controlsPanel.setProcessDisabled(false);
-    this.controlsPanel.setStatus("idle", "Ready");
+    this.controlsPanel.setStatus("idle", t("statusReady"));
   }
 
   /**
@@ -111,11 +112,11 @@ export class PixelSnapperApp extends BaseElement {
     const pixelSizeOverride = this.controlsPanel.pixelSizeOverride;
 
     if (pixelSizeOverride !== undefined && (isNaN(pixelSizeOverride) || pixelSizeOverride < 1)) {
-      this.controlsPanel.setStatus("error", "Pixel size override must be a number ≥ 1.");
+      this.controlsPanel.setStatus("error", t("pixelSizeError"));
       return;
     }
 
-    this.controlsPanel.setStatus("processing", "Processing…");
+    this.controlsPanel.setStatus("processing", t("statusProcessing"));
     this.controlsPanel.setProcessDisabled(true);
     this.controlsPanel.setDownloadDisabled(true);
 
@@ -141,7 +142,7 @@ export class PixelSnapperApp extends BaseElement {
       return;
     }
 
-    this.controlsPanel.setStatus("done", `Done in ${elapsed} ms`);
+    this.controlsPanel.setStatus("done", t("statusDone", elapsed));
     this.controlsPanel.setProcessDisabled(false);
     this.controlsPanel.setDownloadDisabled(false);
   }

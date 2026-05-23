@@ -1,0 +1,130 @@
+{
+  "pageTitle": {
+    "message": "Pixel Snapper — Sprite Fusion"
+  },
+  "metaDescription": {
+    "message": "Snap AI-generated pixel art to a perfect grid. Upload a PNG or JPEG and get a clean, quantized, grid-aligned output instantly — all in your browser."
+  },
+  "brandName": {
+    "message": "Pixel Snapper"
+  },
+  "headerTagline": {
+    "message": "Snap AI pixel art to a perfect grid — in your browser"
+  },
+  "sectionHeadingImage": {
+    "message": "Image"
+  },
+  "dropLabel": {
+    "message": "Drop image here"
+  },
+  "dropHint": {
+    "message": "or click to browse · PNG / JPEG"
+  },
+  "fileInputAriaLabel": {
+    "message": "Upload image file"
+  },
+  "sectionHeadingParams": {
+    "message": "Parameters"
+  },
+  "paletteColorsLabel": {
+    "message": "Palette colors"
+  },
+  "kColorsHint": {
+    "message": "Number of colors in the quantized palette"
+  },
+  "pixelSizeOverrideLabel": {
+    "message": "Pixel size override"
+  },
+  "pixelSizeAutoLabel": {
+    "message": "Auto"
+  },
+  "pixelSizeAutoAriaLabel": {
+    "message": "Auto-detect pixel size"
+  },
+  "pixelSizePlaceholder": {
+    "message": "e.g. 8"
+  },
+  "pixelSizeAriaLabel": {
+    "message": "Pixel size override in pixels"
+  },
+  "pixelSizeHint": {
+    "message": "Force a specific grid cell size in source pixels"
+  },
+  "snapBtn": {
+    "message": "Snap Pixels"
+  },
+  "downloadBtn": {
+    "message": "Download PNG"
+  },
+  "downloadBtnAriaLabel": {
+    "message": "Download the processed image as PNG"
+  },
+  "statusReady": {
+    "message": "Ready"
+  },
+  "labelOriginal": {
+    "message": "Original"
+  },
+  "labelResult": {
+    "message": "Result"
+  },
+  "zoomControlsAriaLabel": {
+    "message": "Zoom controls"
+  },
+  "zoomOutBtnAriaLabel": {
+    "message": "Zoom out"
+  },
+  "zoomOutBtnTitle": {
+    "message": "Zoom out"
+  },
+  "zoomInBtnAriaLabel": {
+    "message": "Zoom in"
+  },
+  "zoomInBtnTitle": {
+    "message": "Zoom in"
+  },
+  "zoomResetBtnAriaLabel": {
+    "message": "Reset zoom"
+  },
+  "zoomResetBtnTitle": {
+    "message": "Reset zoom"
+  },
+  "canvasOriginalAriaLabel": {
+    "message": "Original image"
+  },
+  "canvasResultAriaLabel": {
+    "message": "Processed image"
+  },
+  "emptyOriginalText": {
+    "message": "No image loaded"
+  },
+  "emptyResultText": {
+    "message": "Process an image to see the result"
+  },
+  "controlsPanelAriaLabel": {
+    "message": "Processing controls"
+  },
+  "imageViewportAriaLabel": {
+    "message": "Image preview"
+  },
+  "unsupportedFileType": {
+    "message": "Unsupported file type. Please use PNG or JPEG."
+  },
+  "statusLoading": {
+    "message": "Loading…"
+  },
+  "statusProcessing": {
+    "message": "Processing…"
+  },
+  "pixelSizeError": {
+    "message": "Pixel size override must be a number ≥ 1."
+  },
+  "statusDone": {
+    "message": "Done in $1 ms",
+    "placeholders": {
+      "1": {
+        "content": "$1"
+      }
+    }
+  }
+}

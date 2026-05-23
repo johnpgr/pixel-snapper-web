@@ -1,0 +1,130 @@
+{
+  "pageTitle": {
+    "message": "Pixel Snapper — Sprite Fusion"
+  },
+  "metaDescription": {
+    "message": "Ajuste pixel art gerada por IA para uma grade perfeita. Envie um PNG ou JPEG e obtenha um resultado limpo, quantizado e alinhado à grade instantaneamente — tudo no seu navegador."
+  },
+  "brandName": {
+    "message": "Pixel Snapper"
+  },
+  "headerTagline": {
+    "message": "Ajuste pixel art de IA para uma grade perfeita — no seu navegador"
+  },
+  "sectionHeadingImage": {
+    "message": "Imagem"
+  },
+  "dropLabel": {
+    "message": "Solte a imagem aqui"
+  },
+  "dropHint": {
+    "message": "ou clique para escolher · PNG / JPEG"
+  },
+  "fileInputAriaLabel": {
+    "message": "Carregar arquivo de imagem"
+  },
+  "sectionHeadingParams": {
+    "message": "Parâmetros"
+  },
+  "paletteColorsLabel": {
+    "message": "Cores da paleta"
+  },
+  "kColorsHint": {
+    "message": "Número de cores na paleta quantizada"
+  },
+  "pixelSizeOverrideLabel": {
+    "message": "Substituição do tamanho do pixel"
+  },
+  "pixelSizeAutoLabel": {
+    "message": "Auto"
+  },
+  "pixelSizeAutoAriaLabel": {
+    "message": "Detectar tamanho do pixel automaticamente"
+  },
+  "pixelSizePlaceholder": {
+    "message": "ex: 8"
+  },
+  "pixelSizeAriaLabel": {
+    "message": "Substituição do tamanho do pixel em pixels"
+  },
+  "pixelSizeHint": {
+    "message": "Forçar um tamanho específico de célula de grade em pixels de origem"
+  },
+  "snapBtn": {
+    "message": "Ajustar Pixels"
+  },
+  "downloadBtn": {
+    "message": "Baixar PNG"
+  },
+  "downloadBtnAriaLabel": {
+    "message": "Baixar a imagem processada como PNG"
+  },
+  "statusReady": {
+    "message": "Pronto"
+  },
+  "labelOriginal": {
+    "message": "Original"
+  },
+  "labelResult": {
+    "message": "Resultado"
+  },
+  "zoomControlsAriaLabel": {
+    "message": "Controles de zoom"
+  },
+  "zoomOutBtnAriaLabel": {
+    "message": "Diminuir zoom"
+  },
+  "zoomOutBtnTitle": {
+    "message": "Diminuir zoom"
+  },
+  "zoomInBtnAriaLabel": {
+    "message": "Aumentar zoom"
+  },
+  "zoomInBtnTitle": {
+    "message": "Aumentar zoom"
+  },
+  "zoomResetBtnAriaLabel": {
+    "message": "Redefinir zoom"
+  },
+  "zoomResetBtnTitle": {
+    "message": "Redefinir zoom"
+  },
+  "canvasOriginalAriaLabel": {
+    "message": "Imagem original"
+  },
+  "canvasResultAriaLabel": {
+    "message": "Imagem processada"
+  },
+  "emptyOriginalText": {
+    "message": "Nenhuma imagem carregada"
+  },
+  "emptyResultText": {
+    "message": "Processe uma imagem para ver o resultado"
+  },
+  "controlsPanelAriaLabel": {
+    "message": "Controles de processamento"
+  },
+  "imageViewportAriaLabel": {
+    "message": "Pré-visualização da imagem"
+  },
+  "unsupportedFileType": {
+    "message": "Tipo de arquivo não suportado. Por favor, use PNG ou JPEG."
+  },
+  "statusLoading": {
+    "message": "Carregando…"
+  },
+  "statusProcessing": {
+    "message": "Processando…"
+  },
+  "pixelSizeError": {
+    "message": "A substituição do tamanho do pixel deve ser um número ≥ 1."
+  },
+  "statusDone": {
+    "message": "Concluído em $1 ms",
+    "placeholders": {
+      "1": {
+        "content": "$1"
+      }
+    }
+  }
+}
