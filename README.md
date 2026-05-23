@@ -19,29 +19,6 @@ An elegant, lightweight, and zero-dependency web frontend for the **Sprite Fusio
 
 ---
 
-## Architecture & Core Components
-
-The project is structured around self-contained, modular Web Components that communicate via standard DOM events and manage the application state cleanly:
-
-* **`components/` (Web Components):**
-  * `<pixel-snapper-app>`: Root component that orchestrates state, coordinates file loading, manages parameters, and executes the WASM pipeline.
-  * `<drop-zone>`: Handles drag-and-drop mechanics and local file reading.
-  * `<image-viewport>`: Contains side-by-side image previews, toolbars, and scroll/pan container.
-  * `<image-preview>`: Dedicated canvas viewer displaying the original or result image with dimensions and metadata.
-  * `<zoom-controls>`: Dynamic button interface for controlling canvas zoom scale.
-  * `<palette-control>`: Range input for configuring quantized palette color count ($K$).
-  * `<pixel-override-control>`: Numeric and checkbox controls for configuring auto-detected or overridden grid cell sizes.
-  * `<status-bar>`: Live processing state indicators and screen-reader polite announcements.
-* **`lib/` (Helper Modules):**
-  * `wasm.js`: WebAssembly module loader and execution wrapper.
-  * `i18n.js`: Client-side internationalization manager. Loads JSON locales and translates markup declaratively via `data-i18n` attributes.
-  * `canvas.js`: Low-level canvas rendering, aspect-ratio calculators, and pixel-data extraction.
-  * `zoom.js`: Viewport scaling math and mouse/scroll interaction logic.
-  * `download.js`: Client-side binary export/download exporter.
-  * `result.js`: Simple, robust monadic functional error-handling implementation (`ok`/`err`).
-
----
-
 ## Repository Directory Structure
 
 ```text
