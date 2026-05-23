@@ -45,5 +45,9 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-  }
+  },
+  "exclude": [
+    "pkg",
+    "node_modules"
+  ]
 }

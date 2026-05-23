@@ -1,0 +1,891 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "components/controls-panel.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ControlsPanel",
+          "members": [
+            {
+              "kind": "field",
+              "name": "kColors",
+              "description": "Retrieves the current palette colors range value.",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "pixelSizeOverride",
+              "description": "Retrieves the current pixel size manual override value.",
+              "return": {
+                "type": {
+                  "text": "number | undefined"
+                }
+              },
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "setStatus",
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "\"idle\" | \"processing\" | \"done\" | \"error\""
+                  }
+                },
+                {
+                  "name": "message",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Adjusts the processing status visual feedback."
+            },
+            {
+              "kind": "method",
+              "name": "setProcessDisabled",
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "description": "Disables or enables the main \"Snap Pixels\" execution button."
+            },
+            {
+              "kind": "method",
+              "name": "setDownloadDisabled",
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "description": "Disables or enables the \"Download PNG\" button."
+            },
+            {
+              "kind": "method",
+              "name": "clearDropZone",
+              "description": "Resets the file selection back to empty."
+            },
+            {
+              "kind": "field",
+              "name": "dropZone",
+              "type": {
+                "text": "DropZone | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "palette",
+              "type": {
+                "text": "PaletteControl | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "pixelOverride",
+              "type": {
+                "text": "PixelOverrideControl | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "statusBar",
+              "type": {
+                "text": "StatusBar | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "processBtn",
+              "type": {
+                "text": "HTMLButtonElement | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "downloadBtn",
+              "type": {
+                "text": "HTMLButtonElement | null"
+              },
+              "default": "null"
+            }
+          ],
+          "events": [
+            {
+              "name": "file-select",
+              "type": {
+                "text": "CustomEvent"
+              }
+            },
+            {
+              "name": "process",
+              "type": {
+                "text": "CustomEvent"
+              }
+            },
+            {
+              "name": "download",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "controls-panel",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ControlsPanel",
+          "declaration": {
+            "name": "ControlsPanel",
+            "module": "components/controls-panel.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "controls-panel",
+          "declaration": {
+            "name": "ControlsPanel",
+            "module": "components/controls-panel.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "components/drop-zone.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "DropZone",
+          "members": [
+            {
+              "kind": "method",
+              "name": "setFile",
+              "parameters": [
+                {
+                  "name": "file",
+                  "type": {
+                    "text": "File"
+                  }
+                }
+              ],
+              "description": "Updates the drop zone display text and visual class for a selected file."
+            },
+            {
+              "kind": "method",
+              "name": "clear",
+              "description": "Resets the drop zone to its initial empty state."
+            },
+            {
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "HTMLInputElement | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "HTMLSpanElement | null"
+              },
+              "default": "null"
+            }
+          ],
+          "events": [
+            {
+              "name": "file-select",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "drop-zone",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DropZone",
+          "declaration": {
+            "name": "DropZone",
+            "module": "components/drop-zone.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "drop-zone",
+          "declaration": {
+            "name": "DropZone",
+            "module": "components/drop-zone.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "components/image-preview.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ImagePreview",
+          "members": [
+            {
+              "kind": "method",
+              "name": "clear",
+              "description": "Clears the loaded canvas image and resets the label info."
+            },
+            {
+              "kind": "method",
+              "name": "draw",
+              "parameters": [
+                {
+                  "name": "bytes",
+                  "type": {
+                    "text": "Uint8Array"
+                  }
+                }
+              ],
+              "description": "Decodes image bytes and renders them in the canvas viewport.",
+              "return": {
+                "type": {
+                  "text": "Promise<Result<ImageSize>>"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setZoom",
+              "parameters": [
+                {
+                  "name": "factor",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ],
+              "description": "Applies the CSS visual transformation scale to the internal canvas."
+            },
+            {
+              "kind": "field",
+              "name": "canvas",
+              "type": {
+                "text": "HTMLCanvasElement | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "emptyState",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "infoDisplay",
+              "type": {
+                "text": "HTMLSpanElement | null"
+              },
+              "default": "null"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "image-preview",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ImagePreview",
+          "declaration": {
+            "name": "ImagePreview",
+            "module": "components/image-preview.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "image-preview",
+          "declaration": {
+            "name": "ImagePreview",
+            "module": "components/image-preview.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "components/image-viewport.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ImageViewport",
+          "members": [
+            {
+              "kind": "method",
+              "name": "applyZoom",
+              "parameters": [
+                {
+                  "name": "factor",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ],
+              "description": "Applies CSS transformations to scale both canvases."
+            },
+            {
+              "kind": "method",
+              "name": "clear",
+              "description": "Clears both image viewports."
+            },
+            {
+              "kind": "method",
+              "name": "drawOriginal",
+              "parameters": [
+                {
+                  "name": "bytes",
+                  "type": {
+                    "text": "Uint8Array"
+                  }
+                }
+              ],
+              "description": "Renders the original source image bytes on the first preview.",
+              "return": {
+                "type": {
+                  "text": "Promise<Result<ImageSize>>"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "drawResult",
+              "parameters": [
+                {
+                  "name": "bytes",
+                  "type": {
+                    "text": "Uint8Array"
+                  }
+                }
+              ],
+              "description": "Renders the snaps-aligned processed image bytes on the second preview.",
+              "return": {
+                "type": {
+                  "text": "Promise<Result<ImageSize>>"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "zoomControls",
+              "type": {
+                "text": "ZoomControls | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "originalPreview",
+              "type": {
+                "text": "ImagePreview | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "resultPreview",
+              "type": {
+                "text": "ImagePreview | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "canvasesContainer",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "default": "null"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "image-viewport",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ImageViewport",
+          "declaration": {
+            "name": "ImageViewport",
+            "module": "components/image-viewport.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "image-viewport",
+          "declaration": {
+            "name": "ImageViewport",
+            "module": "components/image-viewport.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "components/palette-control.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "PaletteControl",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "description": "Retrieves the current color selection from the range slider.",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "HTMLInputElement | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "display",
+              "type": {
+                "text": "HTMLSpanElement | null"
+              },
+              "default": "null"
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "palette-control",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PaletteControl",
+          "declaration": {
+            "name": "PaletteControl",
+            "module": "components/palette-control.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "palette-control",
+          "declaration": {
+            "name": "PaletteControl",
+            "module": "components/palette-control.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "components/pixel-override-control.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "PixelOverrideControl",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "description": "Returns the grid cell override value, or undefined if auto-detection is active.",
+              "return": {
+                "type": {
+                  "text": "number | undefined"
+                }
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "autoCheckbox",
+              "type": {
+                "text": "HTMLInputElement | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "sizeInput",
+              "type": {
+                "text": "HTMLInputElement | null"
+              },
+              "default": "null"
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "pixel-override-control",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PixelOverrideControl",
+          "declaration": {
+            "name": "PixelOverrideControl",
+            "module": "components/pixel-override-control.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "pixel-override-control",
+          "declaration": {
+            "name": "PixelOverrideControl",
+            "module": "components/pixel-override-control.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "components/pixel-snapper-app.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "PixelSnapperApp",
+          "members": [
+            {
+              "kind": "method",
+              "name": "loadFile",
+              "parameters": [
+                {
+                  "name": "file",
+                  "type": {
+                    "text": "File"
+                  }
+                }
+              ],
+              "description": "Reads the selected file buffer, renders the preview, and updates visual controls.",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "processImage",
+              "description": "Executes the WASM pixel snapped quantization algorithm.",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "downloadResult",
+              "description": "Triggers the processed image file download saving step."
+            },
+            {
+              "kind": "field",
+              "name": "controlsPanel",
+              "type": {
+                "text": "ControlsPanel | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "imageViewport",
+              "type": {
+                "text": "ImageViewport | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "sourceBytes",
+              "type": {
+                "text": "Uint8Array | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "resultBytes",
+              "type": {
+                "text": "Uint8Array | null"
+              },
+              "default": "null"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "pixel-snapper-app",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PixelSnapperApp",
+          "declaration": {
+            "name": "PixelSnapperApp",
+            "module": "components/pixel-snapper-app.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "pixel-snapper-app",
+          "declaration": {
+            "name": "PixelSnapperApp",
+            "module": "components/pixel-snapper-app.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "components/status-bar.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "StatusBar",
+          "members": [
+            {
+              "kind": "method",
+              "name": "setStatus",
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "\"idle\" | \"processing\" | \"done\" | \"error\""
+                  }
+                },
+                {
+                  "name": "message",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Adjusts the visual status indicator state and updates the feedback label."
+            },
+            {
+              "kind": "field",
+              "name": "textSpan",
+              "type": {
+                "text": "HTMLSpanElement | null"
+              },
+              "default": "null"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "status-bar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "StatusBar",
+          "declaration": {
+            "name": "StatusBar",
+            "module": "components/status-bar.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "status-bar",
+          "declaration": {
+            "name": "StatusBar",
+            "module": "components/status-bar.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "components/zoom-controls.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ZoomControls",
+          "members": [
+            {
+              "kind": "method",
+              "name": "updateDisplay",
+              "description": "Refreshes the percentage status label and dispatches a zoom change event."
+            },
+            {
+              "kind": "method",
+              "name": "stepIn",
+              "description": "Steps the zoom level up."
+            },
+            {
+              "kind": "method",
+              "name": "stepOut",
+              "description": "Steps the zoom level down."
+            },
+            {
+              "kind": "method",
+              "name": "reset",
+              "description": "Resets the zoom level to 100%."
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "description": "Returns the current zoom level.",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "btnOut",
+              "type": {
+                "text": "HTMLButtonElement | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "btnIn",
+              "type": {
+                "text": "HTMLButtonElement | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "btnReset",
+              "type": {
+                "text": "HTMLButtonElement | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "display",
+              "type": {
+                "text": "HTMLSpanElement | null"
+              },
+              "default": "null"
+            }
+          ],
+          "events": [
+            {
+              "name": "zoom-change",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "zoom-controls",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ZoomControls",
+          "declaration": {
+            "name": "ZoomControls",
+            "module": "components/zoom-controls.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "zoom-controls",
+          "declaration": {
+            "name": "ZoomControls",
+            "module": "components/zoom-controls.js"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "sprite-fusion-client",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "analyze": "npx @custom-elements-manifest/analyzer analyze"
+  },
+  "customElements": "custom-elements.json"
+}
