@@ -1,0 +1,6 @@
+# TypeScript compiler cache
+*.tsbuildinfo
+
+# OS local files
+.DS_Store
+Thumbs.db
