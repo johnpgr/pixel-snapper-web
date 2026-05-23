@@ -1,4 +1,4 @@
-# Sprite Fusion Pixel Snapper — Web Client
+# Pixel Snapper — Web Client
 
 An elegant, lightweight, and zero-dependency web frontend for the **Sprite Fusion Pixel Snapper** tool. This client enables game developers and pixel artists to snap AI-generated pixel art, inconsistent sprite sheets, or procedural 2D assets to a perfect, consistent grid and quantize colors to a clean palette—all running completely client-side in the browser via WebAssembly.
 
