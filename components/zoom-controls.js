@@ -34,32 +34,34 @@ export class ZoomControls extends BaseElement {
      * @type {HTMLSpanElement | null}
      */
     this.display = null;
+    /**
+     * Current zoom factor (1 = 100%).
+     * @type {number}
+     */
+    this.currentZoom = 1;
   }
 
   connectedCallback() {
-    this.btnOut = this.queryElement("#zoom-out-btn", HTMLButtonElement);
-    this.btnIn = this.queryElement("#zoom-in-btn", HTMLButtonElement);
-    this.btnReset = this.queryElement("#zoom-reset-btn", HTMLButtonElement);
+    this.btnOut = this.queryElement(".zoom-out-btn", HTMLButtonElement);
+    this.btnIn = this.queryElement(".zoom-in-btn", HTMLButtonElement);
+    this.btnReset = this.queryElement(".zoom-reset-btn", HTMLButtonElement);
     this.display = this.queryElement(".zoom-value", HTMLSpanElement);
 
     if (this.btnOut) {
       this.btnOut.addEventListener("click", () => {
-        zoom.stepOut();
-        this.updateDisplay();
+        this.stepOut();
       });
     }
 
     if (this.btnIn) {
       this.btnIn.addEventListener("click", () => {
-        zoom.stepIn();
-        this.updateDisplay();
+        this.stepIn();
       });
     }
 
     if (this.btnReset) {
       this.btnReset.addEventListener("click", () => {
-        zoom.reset();
-        this.updateDisplay();
+        this.reset();
       });
     }
   }
@@ -68,18 +70,17 @@ export class ZoomControls extends BaseElement {
    * Refreshes the percentage status label and dispatches a zoom change event.
    */
   updateDisplay() {
-    const factor = zoom.get();
     if (this.display) {
-      this.display.textContent = `${Math.round(factor * 100)}%`;
+      this.display.textContent = `${Math.round(this.currentZoom * 100)}%`;
     }
-    this.emit("zoomchange", { zoom: factor });
+    this.emit("zoomchange", { zoom: this.currentZoom });
   }
 
   /**
    * Steps the zoom level up.
    */
   stepIn() {
-    zoom.stepIn();
+    this.currentZoom = zoom.getNextStep(this.currentZoom);
     this.updateDisplay();
   }
 
@@ -87,7 +88,7 @@ export class ZoomControls extends BaseElement {
    * Steps the zoom level down.
    */
   stepOut() {
-    zoom.stepOut();
+    this.currentZoom = zoom.getPrevStep(this.currentZoom);
     this.updateDisplay();
   }
 
@@ -95,7 +96,7 @@ export class ZoomControls extends BaseElement {
    * Resets the zoom level to 100%.
    */
   reset() {
-    zoom.reset();
+    this.currentZoom = 1;
     this.updateDisplay();
   }
 
@@ -105,7 +106,7 @@ export class ZoomControls extends BaseElement {
    * @type {number}
    */
   get value() {
-    return zoom.get();
+    return this.currentZoom;
   }
 }
 

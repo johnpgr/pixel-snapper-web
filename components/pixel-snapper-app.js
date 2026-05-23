@@ -14,10 +14,15 @@ export class PixelSnapperApp extends BaseElement {
      */
     this.controlsPanel = null;
     /**
-     * Side-by-side canvas preview viewport panel.
+     * Viewport displaying the original uploaded source image.
      * @type {ImageViewport | null}
      */
-    this.imageViewport = null;
+    this.originalViewport = null;
+    /**
+     * Viewport displaying the snapped, quantized result image.
+     * @type {ImageViewport | null}
+     */
+    this.resultViewport = null;
     /**
      * Original uploaded source image raw bytes.
      * @type {Uint8Array | null}
@@ -32,10 +37,11 @@ export class PixelSnapperApp extends BaseElement {
 
   async connectedCallback() {
     this.controlsPanel = this.queryElement("controls-panel", ControlsPanel);
-    this.imageViewport = this.queryElement("image-viewport", ImageViewport);
+    this.originalViewport = this.queryElement('image-viewport[type="original"]', ImageViewport);
+    this.resultViewport = this.queryElement('image-viewport[type="result"]', ImageViewport);
 
-    if (!this.controlsPanel || !this.imageViewport) {
-      console.error("[PixelSnapperApp] Required child panels controls-panel or image-viewport are absent.");
+    if (!this.controlsPanel || !this.originalViewport || !this.resultViewport) {
+      console.error("[PixelSnapperApp] Required child panels controls-panel or image-viewports are absent.");
       return;
     }
 
@@ -73,7 +79,7 @@ export class PixelSnapperApp extends BaseElement {
    * @returns {Promise<void>}
    */
   async loadFile(file) {
-    if (!this.controlsPanel || !this.imageViewport) return;
+    if (!this.controlsPanel || !this.originalViewport || !this.resultViewport) return;
 
     if (!file.type.startsWith("image/")) {
       this.controlsPanel.setStatus("error", t("unsupportedFileType"));
@@ -81,7 +87,9 @@ export class PixelSnapperApp extends BaseElement {
     }
 
     this.controlsPanel.setStatus("idle", t("statusLoading"));
-    this.imageViewport.clear();
+    this.originalViewport.clear();
+    this.resultViewport.clear();
+    this.controlsPanel.clearLogs();
     this.resultBytes = null;
     this.controlsPanel.setDownloadDisabled(true);
     this.controlsPanel.setProcessDisabled(true);
@@ -89,7 +97,7 @@ export class PixelSnapperApp extends BaseElement {
     const buffer = await file.arrayBuffer();
     this.sourceBytes = new Uint8Array(buffer);
 
-    const drawResult = await this.imageViewport.drawOriginal(this.sourceBytes);
+    const drawResult = await this.originalViewport.draw(this.sourceBytes);
     if (!drawResult.ok) {
       this.controlsPanel.setStatus("error", drawResult.error);
       this.sourceBytes = null;
@@ -106,7 +114,7 @@ export class PixelSnapperApp extends BaseElement {
    * @returns {Promise<void>}
    */
   async processImage() {
-    if (!this.controlsPanel || !this.imageViewport || !this.sourceBytes) return;
+    if (!this.controlsPanel || !this.originalViewport || !this.resultViewport || !this.sourceBytes) return;
 
     const kColors = this.controlsPanel.kColors;
     const pixelSizeOverride = this.controlsPanel.pixelSizeOverride;
@@ -133,9 +141,17 @@ export class PixelSnapperApp extends BaseElement {
       return;
     }
 
-    this.resultBytes = processResult.value;
+    const { output, pixelSize, pixelSizeMode, outputWidth, outputHeight } = processResult.value;
+    this.resultBytes = output;
 
-    const drawResult = await this.imageViewport.drawResult(this.resultBytes);
+    this.controlsPanel.setLogs({
+      pixelSize,
+      pixelSizeMode,
+      outputWidth,
+      outputHeight
+    });
+
+    const drawResult = await this.resultViewport.draw(this.resultBytes);
     if (!drawResult.ok) {
       this.controlsPanel.setStatus("error", drawResult.error);
       this.controlsPanel.setProcessDisabled(false);

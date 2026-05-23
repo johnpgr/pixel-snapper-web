@@ -126,5 +126,26 @@
         "content": "$1"
       }
     }
+  },
+  "sectionHeadingLogs": {
+    "message": "Estatísticas de Execução"
+  },
+  "logPixelSize": {
+    "message": "Tamanho do Pixel"
+  },
+  "logOutputSize": {
+    "message": "Grade de Saída"
+  },
+  "logAutoDetected": {
+    "message": "auto"
+  },
+  "logOverride": {
+    "message": "forçado"
+  },
+  "logNoData": {
+    "message": "Nenhuma estatística de execução ainda."
+  },
+  "logCells": {
+    "message": "células"
   }
 }

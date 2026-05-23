@@ -3,6 +3,7 @@ import { DropZone } from "./drop-zone.js";
 import { PaletteControl } from "./palette-control.js";
 import { PixelOverrideControl } from "./pixel-override-control.js";
 import { StatusBar } from "./status-bar.js";
+import { LogsPanel } from "./logs-panel.js";
 
 /**
  * @typedef {HTMLElementEventMap & {
@@ -51,6 +52,11 @@ export class ControlsPanel extends BaseElement {
      * @type {HTMLButtonElement | null}
      */
     this.downloadBtn = null;
+    /**
+     * Logs panel component displaying execution statistics.
+     * @type {LogsPanel | null}
+     */
+    this.logsPanel = null;
   }
 
   connectedCallback() {
@@ -60,6 +66,7 @@ export class ControlsPanel extends BaseElement {
     this.statusBar = this.queryElement("status-bar", StatusBar);
     this.processBtn = this.queryElement("#process-btn", HTMLButtonElement);
     this.downloadBtn = this.queryElement("#download-btn", HTMLButtonElement);
+    this.logsPanel = this.queryElement("logs-panel", LogsPanel);
 
     // Wire file selection
     if (this.dropZone) {
@@ -141,6 +148,26 @@ export class ControlsPanel extends BaseElement {
   clearDropZone() {
     if (this.dropZone) {
       this.dropZone.clear();
+    }
+  }
+
+  /**
+   * Updates the execution logs display in the sidebar.
+   *
+   * @param {SnapperStats} stats
+   */
+  setLogs(stats) {
+    if (this.logsPanel) {
+      this.logsPanel.setLogs(stats);
+    }
+  }
+
+  /**
+   * Resets the execution logs back to empty state.
+   */
+  clearLogs() {
+    if (this.logsPanel) {
+      this.logsPanel.clear();
     }
   }
 }

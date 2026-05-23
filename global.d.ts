@@ -11,3 +11,18 @@ interface ImageSize {
   width: number;
   height: number;
 }
+
+interface SnapperStats {
+  pixelSize: number;
+  pixelSizeMode: string;
+  outputWidth: number;
+  outputHeight: number;
+}
+
+interface SnapperResultData {
+  output: Uint8Array;
+  pixelSize: number;
+  pixelSizeMode: string;
+  outputWidth: number;
+  outputHeight: number;
+}

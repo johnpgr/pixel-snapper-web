@@ -11,38 +11,26 @@ export class ImageViewport extends BaseElement {
      */
     this.zoomControls = null;
     /**
-     * Viewport preview container displaying the original source image.
+     * Viewport preview container displaying the image.
      * @type {ImagePreview | null}
      */
-    this.originalPreview = null;
-    /**
-     * Viewport preview container displaying the processed, quantized image.
-     * @type {ImagePreview | null}
-     */
-    this.resultPreview = null;
-    /**
-     * Nested canvases wrapper element.
-     * @type {HTMLElement | null}
-     */
-    this.canvasesContainer = null;
+    this.preview = null;
   }
 
   connectedCallback() {
     this.zoomControls = this.queryElement("zoom-controls", ZoomControls);
-    this.originalPreview = this.queryElement('image-preview[type="original"]', ImagePreview);
-    this.resultPreview = this.queryElement('image-preview[type="result"]', ImagePreview);
-    this.canvasesContainer = this.queryElement("#canvases-container", HTMLElement);
+    this.preview = this.queryElement("image-preview", ImagePreview);
 
-    // Wire zoom change event to propagate transformation scaling onto both previews
+    // Wire zoom change event to propagate transformation scaling onto the preview
     if (this.zoomControls) {
       this.zoomControls.addEventListener("zoomchange", (ev) => {
         this.applyZoom(ev.detail.zoom);
       });
     }
 
-    // Wire mouse wheel zoom
-    if (this.canvasesContainer) {
-      this.canvasesContainer.addEventListener("wheel", (/** @type {WheelEvent} */ ev) => {
+    // Wire mouse wheel zoom directly on the preview element
+    if (this.preview) {
+      this.preview.addEventListener("wheel", (/** @type {WheelEvent} */ ev) => {
         if (!ev.ctrlKey && !ev.metaKey) return;
         ev.preventDefault();
 
@@ -58,55 +46,36 @@ export class ImageViewport extends BaseElement {
   }
 
   /**
-   * Applies CSS transformations to scale both canvases.
+   * Applies CSS transformations to scale the canvas.
    *
    * @param {number} factor
    */
   applyZoom(factor) {
-    if (this.originalPreview) {
-      this.originalPreview.setZoom(factor);
-    }
-    if (this.resultPreview) {
-      this.resultPreview.setZoom(factor);
+    if (this.preview) {
+      this.preview.setZoom(factor);
     }
   }
 
   /**
-   * Clears both image viewports.
+   * Clears the image viewport.
    */
   clear() {
-    if (this.originalPreview) {
-      this.originalPreview.clear();
-    }
-    if (this.resultPreview) {
-      this.resultPreview.clear();
+    if (this.preview) {
+      this.preview.clear();
     }
   }
 
   /**
-   * Renders the original source image bytes on the first preview.
+   * Renders the image bytes on the preview.
    *
    * @param {Uint8Array} bytes
    * @returns {Promise<Result<ImageSize>>}
    */
-  async drawOriginal(bytes) {
-    if (this.originalPreview) {
-      return await this.originalPreview.draw(bytes);
+  async draw(bytes) {
+    if (this.preview) {
+      return await this.preview.draw(bytes);
     }
-    return { ok: false, error: "Original preview viewport is absent." };
-  }
-
-  /**
-   * Renders the snaps-aligned processed image bytes on the second preview.
-   *
-   * @param {Uint8Array} bytes
-   * @returns {Promise<Result<ImageSize>>}
-   */
-  async drawResult(bytes) {
-    if (this.resultPreview) {
-      return await this.resultPreview.draw(bytes);
-    }
-    return { ok: false, error: "Result preview viewport is absent." };
+    return { ok: false, error: "Preview viewport is absent." };
   }
 }
 

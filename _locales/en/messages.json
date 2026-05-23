@@ -126,5 +126,26 @@
         "content": "$1"
       }
     }
+  },
+  "sectionHeadingLogs": {
+    "message": "Execution Stats"
+  },
+  "logPixelSize": {
+    "message": "Pixel Size"
+  },
+  "logOutputSize": {
+    "message": "Output Grid"
+  },
+  "logAutoDetected": {
+    "message": "auto"
+  },
+  "logOverride": {
+    "message": "override"
+  },
+  "logNoData": {
+    "message": "No execution stats yet."
+  },
+  "logCells": {
+    "message": "cells"
   }
 }

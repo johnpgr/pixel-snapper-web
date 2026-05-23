@@ -78,7 +78,7 @@
                   }
                 }
               ],
-              "description": "Queries a child element inside this component, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -102,7 +102,7 @@
                   }
                 }
               ],
-              "description": "Queries a required child element inside this component, asserting its type.\nThrows an error if absent or type mismatching.",
+              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
@@ -126,7 +126,7 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -377,7 +377,7 @@
                   }
                 }
               ],
-              "description": "Queries a child element inside this component, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -405,7 +405,7 @@
                   }
                 }
               ],
-              "description": "Queries a required child element inside this component, asserting its type.\nThrows an error if absent or type mismatching.",
+              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
@@ -433,7 +433,7 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -639,7 +639,7 @@
                   }
                 }
               ],
-              "description": "Queries a child element inside this component, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -667,7 +667,7 @@
                   }
                 }
               ],
-              "description": "Queries a required child element inside this component, asserting its type.\nThrows an error if absent or type mismatching.",
+              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
@@ -695,7 +695,7 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -914,7 +914,7 @@
                   }
                 }
               ],
-              "description": "Queries a child element inside this component, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -942,7 +942,7 @@
                   }
                 }
               ],
-              "description": "Queries a required child element inside this component, asserting its type.\nThrows an error if absent or type mismatching.",
+              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
@@ -970,7 +970,7 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -1053,16 +1053,16 @@
                   }
                 }
               ],
-              "description": "Applies CSS transformations to scale both canvases."
+              "description": "Applies CSS transformations to scale the canvas."
             },
             {
               "kind": "method",
               "name": "clear",
-              "description": "Clears both image viewports."
+              "description": "Clears the image viewport."
             },
             {
               "kind": "method",
-              "name": "drawOriginal",
+              "name": "draw",
               "parameters": [
                 {
                   "name": "bytes",
@@ -1071,25 +1071,7 @@
                   }
                 }
               ],
-              "description": "Renders the original source image bytes on the first preview.",
-              "return": {
-                "type": {
-                  "text": "Promise<Result<ImageSize>>"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "drawResult",
-              "parameters": [
-                {
-                  "name": "bytes",
-                  "type": {
-                    "text": "Uint8Array"
-                  }
-                }
-              ],
-              "description": "Renders the snaps-aligned processed image bytes on the second preview.",
+              "description": "Renders the image bytes on the preview.",
               "return": {
                 "type": {
                   "text": "Promise<Result<ImageSize>>"
@@ -1107,29 +1089,11 @@
             },
             {
               "kind": "field",
-              "name": "originalPreview",
+              "name": "preview",
               "type": {
                 "text": "ImagePreview | null"
               },
-              "description": "Viewport preview container displaying the original source image.",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "resultPreview",
-              "type": {
-                "text": "ImagePreview | null"
-              },
-              "description": "Viewport preview container displaying the processed, quantized image.",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "canvasesContainer",
-              "type": {
-                "text": "HTMLElement | null"
-              },
-              "description": "Nested canvases wrapper element.",
+              "description": "Viewport preview container displaying the image.",
               "default": "null"
             },
             {
@@ -1207,7 +1171,7 @@
                   }
                 }
               ],
-              "description": "Queries a child element inside this component, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -1235,7 +1199,7 @@
                   }
                 }
               ],
-              "description": "Queries a required child element inside this component, asserting its type.\nThrows an error if absent or type mismatching.",
+              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
@@ -1263,7 +1227,7 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -1437,7 +1401,7 @@
                   }
                 }
               ],
-              "description": "Queries a child element inside this component, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -1465,7 +1429,7 @@
                   }
                 }
               ],
-              "description": "Queries a required child element inside this component, asserting its type.\nThrows an error if absent or type mismatching.",
+              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
@@ -1493,7 +1457,7 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -1676,7 +1640,7 @@
                   }
                 }
               ],
-              "description": "Queries a child element inside this component, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -1704,7 +1668,7 @@
                   }
                 }
               ],
-              "description": "Queries a required child element inside this component, asserting its type.\nThrows an error if absent or type mismatching.",
+              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
@@ -1732,7 +1696,7 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -1857,11 +1821,20 @@
             },
             {
               "kind": "field",
-              "name": "imageViewport",
+              "name": "originalViewport",
               "type": {
                 "text": "ImageViewport | null"
               },
-              "description": "Side-by-side canvas preview viewport panel.",
+              "description": "Viewport displaying the original uploaded source image.",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "resultViewport",
+              "type": {
+                "text": "ImageViewport | null"
+              },
+              "description": "Viewport displaying the snapped, quantized result image.",
               "default": "null"
             },
             {
@@ -1957,7 +1930,7 @@
                   }
                 }
               ],
-              "description": "Queries a child element inside this component, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -1985,7 +1958,7 @@
                   }
                 }
               ],
-              "description": "Queries a required child element inside this component, asserting its type.\nThrows an error if absent or type mismatching.",
+              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
@@ -2013,7 +1986,7 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -2188,7 +2161,7 @@
                   }
                 }
               ],
-              "description": "Queries a child element inside this component, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -2216,7 +2189,7 @@
                   }
                 }
               ],
-              "description": "Queries a required child element inside this component, asserting its type.\nThrows an error if absent or type mismatching.",
+              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
@@ -2244,7 +2217,7 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -2382,6 +2355,15 @@
               "default": "null"
             },
             {
+              "kind": "field",
+              "name": "currentZoom",
+              "type": {
+                "text": "number"
+              },
+              "description": "Current zoom factor (1 = 100%).",
+              "default": "1"
+            },
+            {
               "kind": "method",
               "name": "addEventListener",
               "parameters": [
@@ -2456,7 +2438,7 @@
                   }
                 }
               ],
-              "description": "Queries a child element inside this component, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"
@@ -2484,7 +2466,7 @@
                   }
                 }
               ],
-              "description": "Queries a required child element inside this component, asserting its type.\nThrows an error if absent or type mismatching.",
+              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
@@ -2512,7 +2494,7 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\nReturns null if absent or type mismatching.",
+              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T | null"

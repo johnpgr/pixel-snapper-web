@@ -103,6 +103,45 @@
         </button>
       </section>
 
+      <logs-panel class="control-section logs-section" aria-labelledby="logs-heading">
+        <h2 id="logs-heading" class="section-heading" data-i18n="sectionHeadingLogs">Execution Stats</h2>
+        
+        <div class="log-placeholder" id="logs-placeholder" data-i18n="logNoData">No execution stats yet.</div>
+
+        <div class="stats-grid" id="stats-grid" style="display: none;">
+          <div class="stat-card">
+            <span class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>
+              </svg>
+            </span>
+            <div class="stat-info">
+              <div class="stat-label" data-i18n="logPixelSize">Pixel Size</div>
+              <div class="stat-value">
+                <span id="log-pixel-size-value">--</span>
+                <span id="log-pixel-size-badge" class="stat-badge">--</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-3.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/>
+              </svg>
+            </span>
+            <div class="stat-info">
+              <div class="stat-label" data-i18n="logOutputSize">Output Grid</div>
+              <div class="stat-value">
+                <span id="log-output-size-value">--</span>
+                <span class="stat-badge auto-detected" style="background: var(--surface-raised); color: var(--text-muted); text-transform: lowercase;" data-i18n="logCells">cells</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </logs-panel>
+
       <status-bar id="process-status" role="status" aria-live="polite">
         <span class="status-dot"></span>
         <span id="status-text" class="status-text" data-i18n="statusReady">Ready</span>
@@ -110,24 +149,22 @@
 
     </controls-panel>
 
-    <!-- ── Right panel: viewport ──────────────────────────────────────── -->
-    <image-viewport data-i18n-aria-label="imageViewportAriaLabel" aria-label="Image preview">
+    <!-- ── Right panel: viewports container ───────────────────────────── -->
+    <div class="viewports-container">
 
-      <div class="viewport-toolbar">
-        <div class="viewport-labels">
+      <!-- Original Image Viewport -->
+      <image-viewport type="original" data-i18n-aria-label="imageViewportAriaLabel" aria-label="Original image preview">
+        <div class="viewport-toolbar">
           <span class="viewport-label" id="original-label" data-i18n="labelOriginal">Original</span>
-          <span class="viewport-label" id="result-label" data-i18n="labelResult">Result</span>
+          <zoom-controls data-i18n-aria-label="zoomControlsAriaLabel" aria-label="Zoom controls">
+            <button class="zoom-btn zoom-out-btn" data-i18n-aria-label="zoomOutBtnAriaLabel" aria-label="Zoom out" data-i18n-title="zoomOutBtnTitle" title="Zoom out">-</button>
+            <span class="zoom-value">100%</span>
+            <button class="zoom-btn zoom-in-btn" data-i18n-aria-label="zoomInBtnAriaLabel" aria-label="Zoom in" data-i18n-title="zoomInBtnTitle" title="Zoom in">+</button>
+            <button class="zoom-btn zoom-reset-btn zoom-reset" data-i18n-aria-label="zoomResetBtnAriaLabel" aria-label="Reset zoom" data-i18n-title="zoomResetBtnTitle" title="Reset zoom">⟳</button>
+          </zoom-controls>
         </div>
-        <zoom-controls data-i18n-aria-label="zoomControlsAriaLabel" aria-label="Zoom controls">
-          <button id="zoom-out-btn" class="zoom-btn" data-i18n-aria-label="zoomOutBtnAriaLabel" aria-label="Zoom out" data-i18n-title="zoomOutBtnTitle" title="Zoom out">−</button>
-          <span id="zoom-display" class="zoom-value">100%</span>
-          <button id="zoom-in-btn" class="zoom-btn" data-i18n-aria-label="zoomInBtnAriaLabel" aria-label="Zoom in" data-i18n-title="zoomInBtnTitle" title="Zoom in">+</button>
-          <button id="zoom-reset-btn" class="zoom-btn zoom-reset" data-i18n-aria-label="zoomResetBtnAriaLabel" aria-label="Reset zoom" data-i18n-title="zoomResetBtnTitle" title="Reset zoom">⟳</button>
-        </zoom-controls>
-      </div>
 
-      <div class="canvases-container" id="canvases-container">
-        <image-preview type="original" aria-labelledby="original-label" info-target="original-info">
+        <image-preview aria-labelledby="original-label" info-target="original-info">
           <div class="canvas-empty-state" id="original-empty">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
               <rect x="3" y="3" width="18" height="18" rx="2"/>
@@ -139,9 +176,24 @@
           <canvas id="original-canvas" data-i18n-aria-label="canvasOriginalAriaLabel" aria-label="Original image"></canvas>
         </image-preview>
 
-        <div class="canvas-divider" aria-hidden="true"></div>
+        <div class="viewport-footer">
+          <span id="original-info" class="image-info"></span>
+        </div>
+      </image-viewport>
 
-        <image-preview type="result" aria-labelledby="result-label" info-target="result-info">
+      <!-- Snapped Result Image Viewport -->
+      <image-viewport type="result" data-i18n-aria-label="imageViewportAriaLabel" aria-label="Processed image preview">
+        <div class="viewport-toolbar">
+          <span class="viewport-label" id="result-label" data-i18n="labelResult">Result</span>
+          <zoom-controls data-i18n-aria-label="zoomControlsAriaLabel" aria-label="Zoom controls">
+            <button class="zoom-btn zoom-out-btn" data-i18n-aria-label="zoomOutBtnAriaLabel" aria-label="Zoom out" data-i18n-title="zoomOutBtnTitle" title="Zoom out">−</button>
+            <span class="zoom-value">100%</span>
+            <button class="zoom-btn zoom-in-btn" data-i18n-aria-label="zoomInBtnAriaLabel" aria-label="Zoom in" data-i18n-title="zoomInBtnTitle" title="Zoom in">+</button>
+            <button class="zoom-btn zoom-reset-btn zoom-reset" data-i18n-aria-label="zoomResetBtnAriaLabel" aria-label="Reset zoom" data-i18n-title="zoomResetBtnTitle" title="Reset zoom">⟳</button>
+          </zoom-controls>
+        </div>
+
+        <image-preview aria-labelledby="result-label" info-target="result-info">
           <div class="canvas-empty-state" id="result-empty">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
@@ -150,14 +202,13 @@
           </div>
           <canvas id="result-canvas" data-i18n-aria-label="canvasResultAriaLabel" aria-label="Processed image" class="pixelated"></canvas>
         </image-preview>
-      </div>
 
-      <div class="viewport-footer">
-        <span id="original-info" class="image-info"></span>
-        <span id="result-info" class="image-info"></span>
-      </div>
+        <div class="viewport-footer">
+          <span id="result-info" class="image-info"></span>
+        </div>
+      </image-viewport>
 
-    </image-viewport>
+    </div>
 
   </pixel-snapper-app>
 
