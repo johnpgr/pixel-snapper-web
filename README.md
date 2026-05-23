@@ -94,6 +94,19 @@ npm run analyze
 
 ---
 
+## Snap Engine & Custom Fork
+
+This web client is powered by a custom WebAssembly compilation of the **Sprite Fusion Pixel Snapper** Rust engine. 
+
+To support rendering real-time execution statistics (such as detected pixel size, grid cell dimensions, and execution performance stats) in the client's sidebar, we modified the core Rust engine to return a structured output (`SnapperResult` object) instead of a raw binary buffer.
+
+This structured-output-enabled variant of the engine is maintained in our custom fork at:
+**[johnpgr/spritefusion-pixel-snapper](https://github.com/johnpgr/spritefusion-pixel-snapper)**
+
+The original command-line interface tool was created by Hugo Duprez (**[Hugo-Dz/spritefusion-pixel-snapper](https://github.com/Hugo-Dz/spritefusion-pixel-snapper)**).
+
+---
+
 ## Acknowledgments
 
 **Pixel Snapper** is an open-source project by [Sprite Fusion](https://spritefusion.com)—a free, web-based tilemap editor designed for game developers, supporting platforms like Unity, Godot, Defold, and GB Studio.
