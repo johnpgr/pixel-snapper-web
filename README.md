@@ -61,46 +61,13 @@ The project is structured around self-contained, modular Web Components that com
 
 ---
 
-## Local Development
-
-### Prerequisites
-
-* [Python 3](https://www.python.org/) (for launching a lightweight HTTP server) or any static file server.
-* [Node.js](https://nodejs.org/) (optional, only needed for updating the Custom Elements manifest).
-
-### Running the App
-
-Start a local development server using Python:
-
-```bash
-npm run dev
-```
-
-Alternatively, run a standard Python HTTP server directly:
-
-```bash
-python -m http.server 3000
-```
-
-Open your browser and navigate to `http://localhost:3000` to interact with the application.
-
-### Custom Elements Manifest Analysis
-
-If you modify any Web Component definitions or parameters, you can re-generate the custom elements description manifest by running:
-
-```bash
-npm run analyze
-```
-
----
-
 ## Snap Engine & Custom Fork
 
 This web client is powered by a custom WebAssembly compilation of the **Sprite Fusion Pixel Snapper** Rust engine. 
 
 To support rendering real-time execution statistics (such as detected pixel size, grid cell dimensions, and execution performance stats) in the client's sidebar, we modified the core Rust engine to return a structured output (`SnapperResult` object) instead of a raw binary buffer.
 
-This structured-output-enabled variant of the engine is maintained in our custom fork at:
+This structured-output-enabled variant of the engine is maintained in my custom fork at:
 **[johnpgr/spritefusion-pixel-snapper](https://github.com/johnpgr/spritefusion-pixel-snapper)**
 
 The original command-line interface tool was created by Hugo Duprez (**[Hugo-Dz/spritefusion-pixel-snapper](https://github.com/Hugo-Dz/spritefusion-pixel-snapper)**).
