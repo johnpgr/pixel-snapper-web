@@ -47,7 +47,7 @@ The project is structured around self-contained, modular Web Components that com
 ```text
 ├── components/          # Native Web Component elements
 ├── lib/                 # Core functional helper scripts (WASM, i18n, Canvas)
-├── pkg/                 # Compiled Rust WebAssembly package (WASM, JS glue)
+├── vendor/              # Compiled Rust WebAssembly package (WASM, JS glue)
 ├── _locales/            # Internationalization dictionaries (JSON)
 │   ├── en/              # English localizations
 │   └── pt_BR/           # Portuguese (Brazil) localizations

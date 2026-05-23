@@ -47,7 +47,7 @@
     "skipLibCheck": true,
   },
   "exclude": [
-    "pkg",
+    "vendor",
     "node_modules"
   ]
 }
