@@ -1,19 +1,33 @@
+import { BaseElement } from "./base-element.js";
+
 /**
- * @fileoverview Custom element encapsulating pixel grid size override selection.
+ * @typedef {HTMLElementEventMap & {
+ *   "change": CustomEvent;
+ * }} PixelOverrideControlEventMap
  */
 
-export class PixelOverrideControl extends HTMLElement {
+/**
+ * @extends {BaseElement<PixelOverrideControlEventMap>}
+ * @fires {CustomEvent} change - Dispatched when the manual override option triggers or changes.
+ */
+export class PixelOverrideControl extends BaseElement {
   constructor() {
     super();
-    /** @type {HTMLInputElement | null} */
+    /**
+     * Checkbox to toggle auto-detection mode.
+     * @type {HTMLInputElement | null}
+     */
     this.autoCheckbox = null;
-    /** @type {HTMLInputElement | null} */
+    /**
+     * Numerical input to force manual grid size override.
+     * @type {HTMLInputElement | null}
+     */
     this.sizeInput = null;
   }
 
   connectedCallback() {
-    const autoCheckbox = /** @type {HTMLInputElement | null} */ (this.querySelector('input[type="checkbox"]'));
-    const sizeInput = /** @type {HTMLInputElement | null} */ (this.querySelector('input[type="number"]'));
+    const autoCheckbox = this.queryElement('input[type="checkbox"]', HTMLInputElement);
+    const sizeInput = this.queryElement('input[type="number"]', HTMLInputElement);
     this.autoCheckbox = autoCheckbox;
     this.sizeInput = sizeInput;
 
@@ -23,11 +37,11 @@ export class PixelOverrideControl extends HTMLElement {
         if (autoCheckbox.checked) {
           sizeInput.value = "";
         }
-        this.dispatchEvent(new CustomEvent("change"));
+        this.emit("change");
       });
 
       sizeInput.addEventListener("input", () => {
-        this.dispatchEvent(new CustomEvent("change"));
+        this.emit("change");
       });
     }
   }
@@ -35,7 +49,7 @@ export class PixelOverrideControl extends HTMLElement {
   /**
    * Returns the grid cell override value, or undefined if auto-detection is active.
    *
-   * @returns {number | undefined}
+   * @type {number | undefined}
    */
   get value() {
     if (!this.autoCheckbox || this.autoCheckbox.checked) {

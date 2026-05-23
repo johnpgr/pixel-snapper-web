@@ -1,46 +1,53 @@
-/**
- * @fileoverview Custom element coordinating preview canvases and zoom transformations.
- */
-
+import { BaseElement } from "./base-element.js";
 import { ZoomControls } from "./zoom-controls.js";
 import { ImagePreview } from "./image-preview.js";
 
-export class ImageViewport extends HTMLElement {
+export class ImageViewport extends BaseElement {
   constructor() {
     super();
-    /** @type {ZoomControls | null} */
+    /**
+     * Component managing discrete canvas preview zoom buttons.
+     * @type {ZoomControls | null}
+     */
     this.zoomControls = null;
-    /** @type {ImagePreview | null} */
+    /**
+     * Viewport preview container displaying the original source image.
+     * @type {ImagePreview | null}
+     */
     this.originalPreview = null;
-    /** @type {ImagePreview | null} */
+    /**
+     * Viewport preview container displaying the processed, quantized image.
+     * @type {ImagePreview | null}
+     */
     this.resultPreview = null;
-    /** @type {HTMLElement | null} */
+    /**
+     * Nested canvases wrapper element.
+     * @type {HTMLElement | null}
+     */
     this.canvasesContainer = null;
   }
 
   connectedCallback() {
-    this.zoomControls = /** @type {ZoomControls | null} */ (this.querySelector("zoom-controls"));
-    this.originalPreview = /** @type {ImagePreview | null} */ (this.querySelector('image-preview[type="original"]'));
-    this.resultPreview = /** @type {ImagePreview | null} */ (this.querySelector('image-preview[type="result"]'));
-    this.canvasesContainer = /** @type {HTMLElement | null} */ (this.querySelector("#canvases-container"));
+    this.zoomControls = this.queryElement("zoom-controls", ZoomControls);
+    this.originalPreview = this.queryElement('image-preview[type="original"]', ImagePreview);
+    this.resultPreview = this.queryElement('image-preview[type="result"]', ImagePreview);
+    this.canvasesContainer = this.queryElement("#canvases-container", HTMLElement);
 
     // Wire zoom change event to propagate transformation scaling onto both previews
     if (this.zoomControls) {
-      this.zoomControls.addEventListener("zoom-change", (ev) => {
-        const factor = /** @type {CustomEvent} */ (ev).detail.zoom;
-        this.applyZoom(factor);
+      this.zoomControls.addEventListener("zoomchange", (ev) => {
+        this.applyZoom(ev.detail.zoom);
       });
     }
 
     // Wire mouse wheel zoom
     if (this.canvasesContainer) {
-      this.canvasesContainer.addEventListener("wheel", (ev) => {
-        const e = /** @type {WheelEvent} */ (ev);
-        if (!e.ctrlKey && !e.metaKey) return;
-        e.preventDefault();
+      this.canvasesContainer.addEventListener("wheel", (/** @type {WheelEvent} */ ev) => {
+        if (!ev.ctrlKey && !ev.metaKey) return;
+        ev.preventDefault();
 
         if (this.zoomControls) {
-          if (e.deltaY < 0) {
+          if (ev.deltaY < 0) {
             this.zoomControls.stepIn();
           } else {
             this.zoomControls.stepOut();

@@ -1,27 +1,46 @@
-/**
- * @fileoverview Custom element encapsulating canvas preview zoom interactions.
- */
-
+import { BaseElement } from "./base-element.js";
 import * as zoom from "../lib/zoom.js";
 
-export class ZoomControls extends HTMLElement {
+/**
+ * @typedef {HTMLElementEventMap & {
+ *   zoomchange: CustomEvent<{zoom: number}>;
+ * }} ZoomControlsEventMap
+ */
+
+/**
+ * @extends {BaseElement<ZoomControlsEventMap>}
+ * @fires {CustomEvent<{zoom: number}>} zoomchange - Dispatched when the zoom level is adjusted.
+ */
+export class ZoomControls extends BaseElement {
   constructor() {
     super();
-    /** @type {HTMLButtonElement | null} */
+    /**
+     * Button to step zoom down.
+     * @type {HTMLButtonElement | null}
+     */
     this.btnOut = null;
-    /** @type {HTMLButtonElement | null} */
+    /**
+     * Button to step zoom up.
+     * @type {HTMLButtonElement | null}
+     */
     this.btnIn = null;
-    /** @type {HTMLButtonElement | null} */
+    /**
+     * Button to reset zoom to 100%.
+     * @type {HTMLButtonElement | null}
+     */
     this.btnReset = null;
-    /** @type {HTMLSpanElement | null} */
+    /**
+     * Numeric text label showing current zoom percentage.
+     * @type {HTMLSpanElement | null}
+     */
     this.display = null;
   }
 
   connectedCallback() {
-    this.btnOut = /** @type {HTMLButtonElement | null} */ (this.querySelector("#zoom-out-btn"));
-    this.btnIn = /** @type {HTMLButtonElement | null} */ (this.querySelector("#zoom-in-btn"));
-    this.btnReset = /** @type {HTMLButtonElement | null} */ (this.querySelector("#zoom-reset-btn"));
-    this.display = /** @type {HTMLSpanElement | null} */ (this.querySelector(".zoom-value"));
+    this.btnOut = this.queryElement("#zoom-out-btn", HTMLButtonElement);
+    this.btnIn = this.queryElement("#zoom-in-btn", HTMLButtonElement);
+    this.btnReset = this.queryElement("#zoom-reset-btn", HTMLButtonElement);
+    this.display = this.queryElement(".zoom-value", HTMLSpanElement);
 
     if (this.btnOut) {
       this.btnOut.addEventListener("click", () => {
@@ -53,9 +72,7 @@ export class ZoomControls extends HTMLElement {
     if (this.display) {
       this.display.textContent = `${Math.round(factor * 100)}%`;
     }
-    this.dispatchEvent(new CustomEvent("zoom-change", {
-      detail: { zoom: factor }
-    }));
+    this.emit("zoomchange", { zoom: factor });
   }
 
   /**
@@ -85,7 +102,7 @@ export class ZoomControls extends HTMLElement {
   /**
    * Returns the current zoom level.
    *
-   * @returns {number}
+   * @type {number}
    */
   get value() {
     return zoom.get();

@@ -1,16 +1,17 @@
-/**
- * @fileoverview Custom element encapsulating processing status bar feedback.
- */
+import { BaseElement } from "./base-element.js";
 
-export class StatusBar extends HTMLElement {
+export class StatusBar extends BaseElement {
   constructor() {
     super();
-    /** @type {HTMLSpanElement | null} */
+    /**
+     * Dynamic text span reporting status feedback messages.
+     * @type {HTMLSpanElement | null}
+     */
     this.textSpan = null;
   }
 
   connectedCallback() {
-    this.textSpan = /** @type {HTMLSpanElement | null} */ (this.querySelector(".status-text"));
+    this.textSpan = this.queryElement(".status-text", HTMLSpanElement);
   }
 
   /**

@@ -1,56 +1,84 @@
-/**
- * @fileoverview Custom element coordinating all processing control inputs and actions.
- */
-
+import { BaseElement } from "./base-element.js";
 import { DropZone } from "./drop-zone.js";
 import { PaletteControl } from "./palette-control.js";
 import { PixelOverrideControl } from "./pixel-override-control.js";
 import { StatusBar } from "./status-bar.js";
 
-export class ControlsPanel extends HTMLElement {
+/**
+ * @typedef {HTMLElementEventMap & {
+ *   fileselect: CustomEvent<{file: File}>;
+ *   process: CustomEvent;
+ *   download: CustomEvent;
+ * }} ControlsPanelEventMap
+ */
+
+/**
+ * @extends {BaseElement<ControlsPanelEventMap>}
+ * @fires {CustomEvent<{file: File}>} fileselect - Dispatched when a new image file is successfully selected.
+ * @fires {CustomEvent} process - Dispatched when the user clicks the "Snap Pixels" action button.
+ * @fires {CustomEvent} download - Dispatched when the user clicks the "Download PNG" action button.
+ */
+export class ControlsPanel extends BaseElement {
   constructor() {
     super();
-    /** @type {DropZone | null} */
+    /**
+     * Component managing image file drag-and-drop or selection inputs.
+     * @type {DropZone | null}
+     */
     this.dropZone = null;
-    /** @type {PaletteControl | null} */
+    /**
+     * Component managing palette color count selections.
+     * @type {PaletteControl | null}
+     */
     this.palette = null;
-    /** @type {PixelOverrideControl | null} */
+    /**
+     * Component managing manual pixel grid size overrides.
+     * @type {PixelOverrideControl | null}
+     */
     this.pixelOverride = null;
-    /** @type {StatusBar | null} */
+    /**
+     * Status bar sub-component showing processing feedback.
+     * @type {StatusBar | null}
+     */
     this.statusBar = null;
-    /** @type {HTMLButtonElement | null} */
+    /**
+     * Action button to execute the grid snapping pipeline.
+     * @type {HTMLButtonElement | null}
+     */
     this.processBtn = null;
-    /** @type {HTMLButtonElement | null} */
+    /**
+     * Action button to trigger snapped image PNG download.
+     * @type {HTMLButtonElement | null}
+     */
     this.downloadBtn = null;
   }
 
   connectedCallback() {
-    this.dropZone = /** @type {DropZone | null} */ (this.querySelector("drop-zone"));
-    this.palette = /** @type {PaletteControl | null} */ (this.querySelector("palette-control"));
-    this.pixelOverride = /** @type {PixelOverrideControl | null} */ (this.querySelector("pixel-override-control"));
-    this.statusBar = /** @type {StatusBar | null} */ (this.querySelector("status-bar"));
-    this.processBtn = /** @type {HTMLButtonElement | null} */ (this.querySelector("#process-btn"));
-    this.downloadBtn = /** @type {HTMLButtonElement | null} */ (this.querySelector("#download-btn"));
+    this.dropZone = this.queryElement("drop-zone", DropZone);
+    this.palette = this.queryElement("palette-control", PaletteControl);
+    this.pixelOverride = this.queryElement("pixel-override-control", PixelOverrideControl);
+    this.statusBar = this.queryElement("status-bar", StatusBar);
+    this.processBtn = this.queryElement("#process-btn", HTMLButtonElement);
+    this.downloadBtn = this.queryElement("#download-btn", HTMLButtonElement);
 
     // Wire file selection
     if (this.dropZone) {
-      this.dropZone.addEventListener("file-select", (ev) => {
-        const file = /** @type {CustomEvent} */ (ev).detail.file;
-        this.dispatchEvent(new CustomEvent("file-select", { detail: { file } }));
+      this.dropZone.addEventListener("fileselect", (ev) => {
+        this.emit("fileselect", { file: ev.detail.file });
       });
     }
 
     // Wire process button click
     if (this.processBtn) {
       this.processBtn.addEventListener("click", () => {
-        this.dispatchEvent(new CustomEvent("process"));
+        this.emit("process");
       });
     }
 
     // Wire download button click
     if (this.downloadBtn) {
       this.downloadBtn.addEventListener("click", () => {
-        this.dispatchEvent(new CustomEvent("download"));
+        this.emit("download");
       });
     }
   }
@@ -58,7 +86,7 @@ export class ControlsPanel extends HTMLElement {
   /**
    * Retrieves the current palette colors range value.
    *
-   * @returns {number}
+   * @type {number}
    */
   get kColors() {
     return this.palette ? this.palette.value : 16;
@@ -67,7 +95,7 @@ export class ControlsPanel extends HTMLElement {
   /**
    * Retrieves the current pixel size manual override value.
    *
-   * @returns {number | undefined}
+   * @type {number | undefined}
    */
   get pixelSizeOverride() {
     return this.pixelOverride ? this.pixelOverride.value : undefined;

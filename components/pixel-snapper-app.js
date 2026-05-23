@@ -1,28 +1,37 @@
-/**
- * @fileoverview Root application Custom Element orchestrating controls and viewport.
- */
-
+import { BaseElement } from "./base-element.js";
 import * as wasm from "../lib/wasm.js";
 import * as download from "../lib/download.js";
 import { ControlsPanel } from "./controls-panel.js";
 import { ImageViewport } from "./image-viewport.js";
 
-export class PixelSnapperApp extends HTMLElement {
+export class PixelSnapperApp extends BaseElement {
   constructor() {
     super();
-    /** @type {ControlsPanel | null} */
+    /**
+     * Sidebar controls panel wrapper.
+     * @type {ControlsPanel | null}
+     */
     this.controlsPanel = null;
-    /** @type {ImageViewport | null} */
+    /**
+     * Side-by-side canvas preview viewport panel.
+     * @type {ImageViewport | null}
+     */
     this.imageViewport = null;
-    /** @type {Uint8Array | null} */
+    /**
+     * Original uploaded source image raw bytes.
+     * @type {Uint8Array | null}
+     */
     this.sourceBytes = null;
-    /** @type {Uint8Array | null} */
+    /**
+     * Snapped result image raw bytes.
+     * @type {Uint8Array | null}
+     */
     this.resultBytes = null;
   }
 
   async connectedCallback() {
-    this.controlsPanel = /** @type {ControlsPanel | null} */ (this.querySelector("controls-panel"));
-    this.imageViewport = /** @type {ImageViewport | null} */ (this.querySelector("image-viewport"));
+    this.controlsPanel = this.queryElement("controls-panel", ControlsPanel);
+    this.imageViewport = this.queryElement("image-viewport", ImageViewport);
 
     if (!this.controlsPanel || !this.imageViewport) {
       console.error("[PixelSnapperApp] Required child panels controls-panel or image-viewport are absent.");
@@ -38,8 +47,8 @@ export class PixelSnapperApp extends HTMLElement {
     }
 
     // Wire file loading selection
-    this.controlsPanel.addEventListener("file-select", async (ev) => {
-      const file = /** @type {CustomEvent} */ (ev).detail.file;
+    this.controlsPanel.addEventListener("fileselect", async (ev) => {
+      const file = ev.detail.file;
       if (file) {
         await this.loadFile(file);
       }

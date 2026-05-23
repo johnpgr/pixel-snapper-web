@@ -1,19 +1,33 @@
+import { BaseElement } from "./base-element.js";
+
 /**
- * @fileoverview Custom element encapsulating drag-and-drop and file picking behavior.
+ * @typedef {HTMLElementEventMap & {
+ *   fileselect: CustomEvent<{file: File}>;
+ * }} DropZoneEventMap
  */
 
-export class DropZone extends HTMLElement {
+/**
+ * @extends {BaseElement<DropZoneEventMap>}
+ * @fires {CustomEvent<{file: File}>} fileselect - Dispatched when an image file is dragged-and-dropped or selected.
+ */
+export class DropZone extends BaseElement {
   constructor() {
     super();
-    /** @type {HTMLInputElement | null} */
+    /**
+     * Hidden file picker input element.
+     * @type {HTMLInputElement | null}
+     */
     this.input = null;
-    /** @type {HTMLSpanElement | null} */
+    /**
+     * Display label reporting status or filename.
+     * @type {HTMLSpanElement | null}
+     */
     this.label = null;
   }
 
   connectedCallback() {
-    this.input = /** @type {HTMLInputElement | null} */ (this.querySelector('input[type="file"]'));
-    this.label = /** @type {HTMLSpanElement | null} */ (this.querySelector('.drop-label'));
+    this.input = this.queryElement('input[type="file"]', HTMLInputElement);
+    this.label = this.queryElement('.drop-label', HTMLSpanElement);
 
     // Delegate click on the drop zone to the hidden file input
     this.addEventListener("click", (e) => {
@@ -38,7 +52,7 @@ export class DropZone extends HTMLElement {
 
       const file = e.dataTransfer?.files[0];
       if (file) {
-        this.dispatchEvent(new CustomEvent("file-select", { detail: { file } }));
+        this.emit("fileselect", { file });
       }
     });
 
@@ -47,7 +61,7 @@ export class DropZone extends HTMLElement {
       this.input.addEventListener("change", () => {
         const file = this.input?.files?.[0];
         if (file) {
-          this.dispatchEvent(new CustomEvent("file-select", { detail: { file } }));
+          this.emit("fileselect", { file });
         }
       });
     }

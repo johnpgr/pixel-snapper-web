@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "python -m http.server 3000",
-    "analyze": "npx @custom-elements-manifest/analyzer analyze"
+    "analyze": "npx @custom-elements-manifest/analyzer analyze --globs components/*.js --exclude pkg,lib --outdir ."
   },
   "customElements": "custom-elements.json"
 }

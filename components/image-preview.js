@@ -1,27 +1,33 @@
-/**
- * @fileoverview Custom element encapsulating canvas preview viewport panels.
- */
-
+import { BaseElement } from "./base-element.js";
 import * as canvas from "../lib/canvas.js";
 
-export class ImagePreview extends HTMLElement {
+export class ImagePreview extends BaseElement {
   constructor() {
     super();
-    /** @type {HTMLCanvasElement | null} */
+    /**
+     * Inner HTML canvas element.
+     * @type {HTMLCanvasElement | null}
+     */
     this.canvas = null;
-    /** @type {HTMLElement | null} */
+    /**
+     * Viewport empty placeholder element.
+     * @type {HTMLElement | null}
+     */
     this.emptyState = null;
-    /** @type {HTMLSpanElement | null} */
+    /**
+     * Target span display for image dimension details.
+     * @type {HTMLSpanElement | null}
+     */
     this.infoDisplay = null;
   }
 
   connectedCallback() {
-    this.canvas = /** @type {HTMLCanvasElement | null} */ (this.querySelector("canvas"));
-    this.emptyState = /** @type {HTMLElement | null} */ (this.querySelector(".canvas-empty-state"));
+    this.canvas = this.queryElement("canvas", HTMLCanvasElement);
+    this.emptyState = this.queryElement(".canvas-empty-state", HTMLElement);
 
     const targetId = this.getAttribute("info-target");
     if (targetId) {
-      this.infoDisplay = /** @type {HTMLSpanElement | null} */ (document.getElementById(targetId));
+      this.infoDisplay = this.queryDocumentElement(targetId, HTMLSpanElement);
     }
 
     // Set dataset empty attribute initially so CSS placeholder rules apply.
