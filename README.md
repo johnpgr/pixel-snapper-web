@@ -33,29 +33,30 @@ The project is structured around self-contained, modular Web Components that com
   * `<pixel-override-control>`: Numeric and checkbox controls for configuring auto-detected or overridden grid cell sizes.
   * `<status-bar>`: Live processing state indicators and screen-reader polite announcements.
 * **`lib/` (Helper Modules):**
-  * `wasm.js`: WebAssembly module loader and execution wrapper.
-  * `i18n.js`: Client-side internationalization manager. Loads JSON locales and translates markup declaratively via `data-i18n` attributes.
-  * `canvas.js`: Low-level canvas rendering, aspect-ratio calculators, and pixel-data extraction.
-  * `zoom.js`: Viewport scaling math and mouse/scroll interaction logic.
-  * `download.js`: Client-side binary export/download exporter.
-  * `result.js`: Simple, robust monadic functional error-handling implementation (`ok`/`err`).
+  * `wasm.ts`: WebAssembly module loader and execution wrapper.
+  * `i18n.ts`: Client-side internationalization manager. Loads JSON locales and translates markup declaratively via `data-i18n` attributes.
+  * `canvas.ts`: Low-level canvas rendering, aspect-ratio calculators, and pixel-data extraction.
+  * `zoom.ts`: Viewport scaling math and mouse/scroll interaction logic.
+  * `download.ts`: Client-side binary export/download exporter.
+  * `result.ts`: Simple, robust monadic functional error-handling implementation (`ok`/`err`).
 
 ---
 
 ## Repository Directory Structure
 
 ```text
-├── components/          # Native Web Component elements
-├── lib/                 # Core functional helper scripts (WASM, i18n, Canvas)
+├── components/          # Native Web Component elements (TypeScript)
+├── lib/                 # Core functional helper modules (TypeScript)
 ├── vendor/              # Compiled Rust WebAssembly package (WASM, JS glue)
 ├── _locales/            # Internationalization dictionaries (JSON)
 │   ├── en/              # English localizations
 │   └── pt_BR/           # Portuguese (Brazil) localizations
+├── dist/                # Output folder for production-ready, compiled assets
 ├── index.html           # Main HTML5 semantic entry point
 ├── index.css            # Modular custom theme (CSS variables, dark-mode, layout)
-├── index.js             # Main application bootstrapping & i18n initializer
+├── index.ts             # Main application bootstrapping & i18n entry point
 ├── custom-elements.json # Declarative custom elements manifest descriptor
-├── package.json         # NPM manifest with development scripts
+├── package.json         # NPM manifest with development and build scripts
 └── README.md            # You are here
 ```
 
@@ -70,19 +71,22 @@ The project is structured around self-contained, modular Web Components that com
 
 ### Running the App
 
-Start a local development server using Python:
+1. Build the application (compiles TypeScript to JavaScript into `dist/`):
+   ```bash
+   npm run build
+   ```
 
-```bash
-npm run dev
-```
+2. Start a local development server from the root of the project:
+   ```bash
+   npm run dev
+   ```
 
-Alternatively, run a standard Python HTTP server directly:
+   Alternatively, run the standard Python HTTP server directly:
+   ```bash
+   python -m http.server 3000
+   ```
 
-```bash
-python -m http.server 3000
-```
-
-Open your browser and navigate to `http://localhost:3000` to interact with the application.
+3. Open your browser and navigate to `http://localhost:3000` to interact with the application.
 
 ### Custom Elements Manifest Analysis
 

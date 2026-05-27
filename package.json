@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "python -m http.server 3000",
-    "analyze": "npx @custom-elements-manifest/analyzer analyze --globs components/*.js --exclude vendor,lib --outdir ."
+    "build": "tsc && cp index.html dist/index.html && cp index.css dist/index.css && cp -r vendor/ dist/vendor && cp -r _locales/ dist/_locales",
+    "clean": "rm -rf dist",
+    "analyze": "npx @custom-elements-manifest/analyzer analyze --globs components/*.ts --exclude vendor,lib,node_modules --outdir ."
   },
   "customElements": "custom-elements.json"
 }

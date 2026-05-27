@@ -1,7 +1,7 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    "checkJs": true,
+    "checkJs": false,
     "allowJs": true,
     "plugins": [
       {
@@ -10,22 +10,19 @@
     ],
     // File Layout
     "rootDir": ".",
-    // "outDir": "./dist",
+    "outDir": "./dist",
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
     "target": "esnext",
+    "lib": ["esnext", "dom", "dom.iterable"],
     "types": [],
-    // For nodejs:
-    // "lib": ["esnext"],
-    // "types": ["node"],
-    // and npm install -D @types/node
 
     // Other Outputs
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
-    "noEmit": true,
+    "noEmit": false,
 
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
@@ -38,6 +35,8 @@
     // "noUnusedParameters": true,
     // "noFallthroughCasesInSwitch": true,
     // "noPropertyAccessFromIndexSignature": true,
+    "rewriteRelativeImportExtensions": true,
+    "allowImportingTsExtensions": true,
 
     // Recommended Options
     "strict": true,
@@ -48,5 +47,5 @@
     "moduleDetection": "force",
     "skipLibCheck": true
   },
-  "exclude": ["vendor", "node_modules"]
+  "exclude": ["dist", "node_modules", "vendor"]
 }

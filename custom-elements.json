@@ -4,7 +4,7 @@
   "modules": [
     {
       "kind": "javascript-module",
-      "path": "components/base-element.js",
+      "path": "components/base-element.ts",
       "declarations": [
         {
           "kind": "class",
@@ -14,6 +14,11 @@
             {
               "kind": "method",
               "name": "addEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -24,7 +29,37 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
+                  }
+                },
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "boolean | AddEventListenerOptions"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "addEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "type",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "listener",
+                  "type": {
+                    "text": "EventListenerOrEventListenerObject"
                   }
                 },
                 {
@@ -39,6 +74,11 @@
             {
               "kind": "method",
               "name": "removeEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -49,7 +89,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -63,31 +103,99 @@
             },
             {
               "kind": "method",
-              "name": "queryElement",
+              "name": "removeEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
-                  "name": "selector",
+                  "name": "type",
                   "type": {
                     "text": "string"
                   }
                 },
                 {
-                  "name": "Type",
+                  "name": "listener",
                   "type": {
-                    "text": "new () => T"
+                    "text": "EventListenerOrEventListenerObject"
+                  }
+                },
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "boolean | EventListenerOptions"
                   }
                 }
-              ],
-              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "queryAttributeOrNull",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K] | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "setAttributeValue",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "AttributeMap[K]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "queryAttribute",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "queryElementOrNull",
               "return": {
                 "type": {
                   "text": "T | null"
                 }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "requireElement",
+              },
               "parameters": [
                 {
                   "name": "selector",
@@ -101,20 +209,19 @@
                     "text": "new () => T"
                   }
                 }
-              ],
-              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "queryElement",
               "return": {
                 "type": {
                   "text": "T"
                 }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "queryDocumentElement",
+              },
               "parameters": [
                 {
-                  "name": "id",
+                  "name": "selector",
                   "type": {
                     "text": "string"
                   }
@@ -125,17 +232,16 @@
                     "text": "new () => T"
                   }
                 }
-              ],
-              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              }
+              ]
             },
             {
               "kind": "method",
               "name": "emit",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -147,11 +253,10 @@
                   "name": "detail",
                   "optional": true,
                   "type": {
-                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : undefined"
+                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : any"
                   }
                 }
-              ],
-              "description": "Dispatches a type-safe custom event from this component."
+              ]
             }
           ],
           "superclass": {
@@ -166,14 +271,14 @@
           "name": "BaseElement",
           "declaration": {
             "name": "BaseElement",
-            "module": "components/base-element.js"
+            "module": "components/base-element.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "components/controls-panel.js",
+      "path": "components/controls-panel.ts",
       "declarations": [
         {
           "kind": "class",
@@ -182,36 +287,92 @@
           "members": [
             {
               "kind": "field",
-              "name": "template",
-              "static": true,
-              "default": "html` <div> <palette-control colors=9></palette-control> </div> `"
+              "name": "dropZone",
+              "type": {
+                "text": "DropZone"
+              },
+              "privacy": "public"
+            },
+            {
+              "kind": "field",
+              "name": "palette",
+              "type": {
+                "text": "PaletteControl"
+              },
+              "privacy": "public"
+            },
+            {
+              "kind": "field",
+              "name": "pixelOverride",
+              "type": {
+                "text": "PixelOverrideControl"
+              },
+              "privacy": "public"
+            },
+            {
+              "kind": "field",
+              "name": "statusBar",
+              "type": {
+                "text": "StatusBar"
+              },
+              "privacy": "public"
+            },
+            {
+              "kind": "field",
+              "name": "processBtn",
+              "type": {
+                "text": "HTMLButtonElement"
+              },
+              "privacy": "public"
+            },
+            {
+              "kind": "field",
+              "name": "downloadBtn",
+              "type": {
+                "text": "HTMLButtonElement"
+              },
+              "privacy": "public"
+            },
+            {
+              "kind": "field",
+              "name": "logsPanel",
+              "type": {
+                "text": "LogsPanel"
+              },
+              "privacy": "public"
             },
             {
               "kind": "field",
               "name": "kColors",
-              "description": "Retrieves the current palette colors range value.",
               "type": {
                 "text": "number"
               },
+              "privacy": "public",
               "readonly": true
             },
             {
               "kind": "field",
               "name": "pixelSizeOverride",
-              "description": "Retrieves the current pixel size manual override value.",
               "type": {
                 "text": "number | undefined"
               },
+              "privacy": "public",
               "readonly": true
             },
             {
               "kind": "method",
               "name": "setStatus",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "state",
                   "type": {
-                    "text": "\"idle\" | \"processing\" | \"done\" | \"error\""
+                    "text": "StatusBarState"
                   }
                 },
                 {
@@ -220,12 +381,17 @@
                     "text": "string"
                   }
                 }
-              ],
-              "description": "Adjusts the processing status visual feedback."
+              ]
             },
             {
               "kind": "method",
               "name": "setProcessDisabled",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "disabled",
@@ -233,12 +399,17 @@
                     "text": "boolean"
                   }
                 }
-              ],
-              "description": "Disables or enables the main \"Snap Pixels\" execution button."
+              ]
             },
             {
               "kind": "method",
               "name": "setDownloadDisabled",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "disabled",
@@ -246,17 +417,27 @@
                     "text": "boolean"
                   }
                 }
-              ],
-              "description": "Disables or enables the \"Download PNG\" button."
+              ]
             },
             {
               "kind": "method",
               "name": "clearDropZone",
-              "description": "Resets the file selection back to empty."
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
             },
             {
               "kind": "method",
               "name": "setLogs",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "stats",
@@ -264,80 +445,26 @@
                     "text": "SnapperStats"
                   }
                 }
-              ],
-              "description": "Updates the execution logs display in the sidebar."
+              ]
             },
             {
               "kind": "method",
               "name": "clearLogs",
-              "description": "Resets the execution logs back to empty state."
-            },
-            {
-              "kind": "field",
-              "name": "dropZone",
-              "type": {
-                "text": "DropZone | null"
-              },
-              "description": "Component managing image file drag-and-drop or selection inputs.",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "palette",
-              "type": {
-                "text": "PaletteControl | null"
-              },
-              "description": "Component managing palette color count selections.",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "pixelOverride",
-              "type": {
-                "text": "PixelOverrideControl | null"
-              },
-              "description": "Component managing manual pixel grid size overrides.",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "statusBar",
-              "type": {
-                "text": "StatusBar | null"
-              },
-              "description": "Status bar sub-component showing processing feedback.",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "processBtn",
-              "type": {
-                "text": "HTMLButtonElement | null"
-              },
-              "description": "Action button to execute the grid snapping pipeline.",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "downloadBtn",
-              "type": {
-                "text": "HTMLButtonElement | null"
-              },
-              "description": "Action button to trigger snapped image PNG download.",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "logsPanel",
-              "type": {
-                "text": "LogsPanel | null"
-              },
-              "description": "Logs panel component displaying execution statistics.",
-              "default": "null"
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
             },
             {
               "kind": "method",
               "name": "addEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -348,7 +475,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -361,12 +488,17 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "removeEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -377,7 +509,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -390,71 +522,116 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttributeOrNull",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K] | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setAttributeValue",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "AttributeMap[K]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttribute",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryElementOrNull",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "selector",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "queryElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "requireElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
                 }
               },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "queryDocumentElement",
               "parameters": [
                 {
-                  "name": "id",
+                  "name": "selector",
                   "type": {
                     "text": "string"
                   }
@@ -466,20 +643,19 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "emit",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -491,43 +667,19 @@
                   "name": "detail",
                   "optional": true,
                   "type": {
-                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : undefined"
+                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : any"
                   }
                 }
               ],
-              "description": "Dispatches a type-safe custom event from this component.",
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
-            }
-          ],
-          "events": [
-            {
-              "type": {
-                "text": "CustomEvent<{file: File}>"
-              },
-              "description": "Dispatched when a new image file is successfully selected.",
-              "name": "fileselect"
-            },
-            {
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "Dispatched when the user clicks the \"Snap Pixels\" action button.",
-              "name": "process"
-            },
-            {
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "Dispatched when the user clicks the \"Download PNG\" action button.",
-              "name": "download"
             }
           ],
           "superclass": {
             "name": "BaseElement",
-            "module": "/components/base-element.js"
+            "module": "/components/base-element.ts"
           },
           "tagName": "controls-panel",
           "customElement": true
@@ -539,7 +691,7 @@
           "name": "ControlsPanel",
           "declaration": {
             "name": "ControlsPanel",
-            "module": "components/controls-panel.js"
+            "module": "components/controls-panel.ts"
           }
         },
         {
@@ -547,14 +699,14 @@
           "name": "controls-panel",
           "declaration": {
             "name": "ControlsPanel",
-            "module": "components/controls-panel.js"
+            "module": "components/controls-panel.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "components/drop-zone.js",
+      "path": "components/drop-zone.ts",
       "declarations": [
         {
           "kind": "class",
@@ -562,8 +714,30 @@
           "name": "DropZone",
           "members": [
             {
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "HTMLInputElement"
+              },
+              "privacy": "public"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "HTMLSpanElement"
+              },
+              "privacy": "public"
+            },
+            {
               "kind": "method",
               "name": "setFile",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "file",
@@ -571,35 +745,26 @@
                     "text": "File"
                   }
                 }
-              ],
-              "description": "Updates the drop zone display text and visual class for a selected file."
+              ]
             },
             {
               "kind": "method",
               "name": "clear",
-              "description": "Resets the drop zone to its initial empty state."
-            },
-            {
-              "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "HTMLInputElement | null"
-              },
-              "description": "Hidden file picker input element.",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "HTMLSpanElement | null"
-              },
-              "description": "Display label reporting status or filename.",
-              "default": "null"
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
             },
             {
               "kind": "method",
               "name": "addEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -610,7 +775,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -623,12 +788,17 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "removeEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -639,7 +809,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -652,71 +822,116 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttributeOrNull",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K] | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setAttributeValue",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "AttributeMap[K]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttribute",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryElementOrNull",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "selector",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "queryElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "requireElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
                 }
               },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "queryDocumentElement",
               "parameters": [
                 {
-                  "name": "id",
+                  "name": "selector",
                   "type": {
                     "text": "string"
                   }
@@ -728,20 +943,19 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "emit",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -753,29 +967,19 @@
                   "name": "detail",
                   "optional": true,
                   "type": {
-                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : undefined"
+                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : any"
                   }
                 }
               ],
-              "description": "Dispatches a type-safe custom event from this component.",
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
-            }
-          ],
-          "events": [
-            {
-              "type": {
-                "text": "CustomEvent<{file: File}>"
-              },
-              "description": "Dispatched when an image file is dragged-and-dropped or selected.",
-              "name": "fileselect"
             }
           ],
           "superclass": {
             "name": "BaseElement",
-            "module": "/components/base-element.js"
+            "module": "/components/base-element.ts"
           },
           "tagName": "drop-zone",
           "customElement": true
@@ -787,7 +991,7 @@
           "name": "DropZone",
           "declaration": {
             "name": "DropZone",
-            "module": "components/drop-zone.js"
+            "module": "components/drop-zone.ts"
           }
         },
         {
@@ -795,28 +999,63 @@
           "name": "drop-zone",
           "declaration": {
             "name": "DropZone",
-            "module": "components/drop-zone.js"
+            "module": "components/drop-zone.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "components/image-preview.js",
+      "path": "components/image-preview.ts",
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "A custom element that previews an image drawn on a canvas and updates a linked info element with its size.",
           "name": "ImagePreview",
           "members": [
             {
+              "kind": "field",
+              "name": "canvas",
+              "type": {
+                "text": "HTMLCanvasElement"
+              },
+              "privacy": "public"
+            },
+            {
+              "kind": "field",
+              "name": "emptyState",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "public"
+            },
+            {
+              "kind": "field",
+              "name": "infoDisplay",
+              "type": {
+                "text": "HTMLSpanElement"
+              },
+              "privacy": "public"
+            },
+            {
               "kind": "method",
               "name": "clear",
-              "description": "Clears the loaded canvas image and resets the label info."
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
             },
             {
               "kind": "method",
               "name": "draw",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<Result<ImageSize>>"
+                }
+              },
               "parameters": [
                 {
                   "name": "bytes",
@@ -824,17 +1063,17 @@
                     "text": "Uint8Array"
                   }
                 }
-              ],
-              "description": "Decodes image bytes and renders them in the canvas viewport.",
-              "return": {
-                "type": {
-                  "text": "Promise<Result<ImageSize>>"
-                }
-              }
+              ]
             },
             {
               "kind": "method",
               "name": "setZoom",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "factor",
@@ -842,39 +1081,16 @@
                     "text": "number"
                   }
                 }
-              ],
-              "description": "Applies the CSS visual transformation scale to the internal canvas."
-            },
-            {
-              "kind": "field",
-              "name": "canvas",
-              "type": {
-                "text": "HTMLCanvasElement | null"
-              },
-              "description": "Inner HTML canvas element.",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "emptyState",
-              "type": {
-                "text": "HTMLElement | null"
-              },
-              "description": "Viewport empty placeholder element.",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "infoDisplay",
-              "type": {
-                "text": "HTMLSpanElement | null"
-              },
-              "description": "Target span display for image dimension details.",
-              "default": "null"
+              ]
             },
             {
               "kind": "method",
               "name": "addEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -885,7 +1101,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -898,12 +1114,17 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "removeEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -914,7 +1135,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -927,71 +1148,116 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttributeOrNull",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K] | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setAttributeValue",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "AttributeMap[K]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttribute",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryElementOrNull",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "selector",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "queryElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "requireElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
                 }
               },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "queryDocumentElement",
               "parameters": [
                 {
-                  "name": "id",
+                  "name": "selector",
                   "type": {
                     "text": "string"
                   }
@@ -1003,20 +1269,19 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "emit",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -1028,20 +1293,28 @@
                   "name": "detail",
                   "optional": true,
                   "type": {
-                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : undefined"
+                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : any"
                   }
                 }
               ],
-              "description": "Dispatches a type-safe custom event from this component.",
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "The selector/ID of the target element to display image dimensions.",
+              "name": "info-target"
             }
           ],
           "superclass": {
             "name": "BaseElement",
-            "module": "/components/base-element.js"
+            "module": "/components/base-element.ts"
           },
           "tagName": "image-preview",
           "customElement": true
@@ -1053,7 +1326,7 @@
           "name": "ImagePreview",
           "declaration": {
             "name": "ImagePreview",
-            "module": "components/image-preview.js"
+            "module": "components/image-preview.ts"
           }
         },
         {
@@ -1061,14 +1334,14 @@
           "name": "image-preview",
           "declaration": {
             "name": "ImagePreview",
-            "module": "components/image-preview.js"
+            "module": "components/image-preview.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "components/image-viewport.js",
+      "path": "components/image-viewport.ts",
       "declarations": [
         {
           "kind": "class",
@@ -1076,48 +1349,12 @@
           "name": "ImageViewport",
           "members": [
             {
-              "kind": "method",
-              "name": "applyZoom",
-              "parameters": [
-                {
-                  "name": "factor",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ],
-              "description": "Applies CSS transformations to scale the canvas."
-            },
-            {
-              "kind": "method",
-              "name": "clear",
-              "description": "Clears the image viewport."
-            },
-            {
-              "kind": "method",
-              "name": "draw",
-              "parameters": [
-                {
-                  "name": "bytes",
-                  "type": {
-                    "text": "Uint8Array"
-                  }
-                }
-              ],
-              "description": "Renders the image bytes on the preview.",
-              "return": {
-                "type": {
-                  "text": "Promise<Result<ImageSize>>"
-                }
-              }
-            },
-            {
               "kind": "field",
               "name": "zoomControls",
               "type": {
                 "text": "ZoomControls | null"
               },
-              "description": "Component managing discrete canvas preview zoom buttons.",
+              "privacy": "public",
               "default": "null"
             },
             {
@@ -1126,12 +1363,63 @@
               "type": {
                 "text": "ImagePreview | null"
               },
-              "description": "Viewport preview container displaying the image.",
+              "privacy": "public",
               "default": "null"
             },
             {
               "kind": "method",
+              "name": "applyZoom",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "factor",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "clear",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "draw",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<Result<ImageSize>>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "bytes",
+                  "type": {
+                    "text": "Uint8Array"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
               "name": "addEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -1142,7 +1430,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -1155,12 +1443,17 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "removeEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -1171,7 +1464,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -1184,71 +1477,116 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttributeOrNull",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K] | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setAttributeValue",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "AttributeMap[K]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttribute",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryElementOrNull",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "selector",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "queryElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "requireElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
                 }
               },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "queryDocumentElement",
               "parameters": [
                 {
-                  "name": "id",
+                  "name": "selector",
                   "type": {
                     "text": "string"
                   }
@@ -1260,20 +1598,19 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "emit",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -1285,20 +1622,19 @@
                   "name": "detail",
                   "optional": true,
                   "type": {
-                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : undefined"
+                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : any"
                   }
                 }
               ],
-              "description": "Dispatches a type-safe custom event from this component.",
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             }
           ],
           "superclass": {
             "name": "BaseElement",
-            "module": "/components/base-element.js"
+            "module": "/components/base-element.ts"
           },
           "tagName": "image-viewport",
           "customElement": true
@@ -1310,7 +1646,7 @@
           "name": "ImageViewport",
           "declaration": {
             "name": "ImageViewport",
-            "module": "components/image-viewport.js"
+            "module": "components/image-viewport.ts"
           }
         },
         {
@@ -1318,14 +1654,14 @@
           "name": "image-viewport",
           "declaration": {
             "name": "ImageViewport",
-            "module": "components/image-viewport.js"
+            "module": "components/image-viewport.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "components/logs-panel.js",
+      "path": "components/logs-panel.ts",
       "declarations": [
         {
           "kind": "class",
@@ -1333,30 +1669,12 @@
           "name": "LogsPanel",
           "members": [
             {
-              "kind": "method",
-              "name": "setLogs",
-              "parameters": [
-                {
-                  "name": "stats",
-                  "type": {
-                    "text": "SnapperStats"
-                  }
-                }
-              ],
-              "description": "Updates the execution logs display in the sidebar."
-            },
-            {
-              "kind": "method",
-              "name": "clear",
-              "description": "Resets the execution logs back to empty state."
-            },
-            {
               "kind": "field",
               "name": "placeholder",
               "type": {
                 "text": "HTMLDivElement | null"
               },
-              "description": "Placeholder text shown when no execution logs exist.",
+              "privacy": "public",
               "default": "null"
             },
             {
@@ -1365,7 +1683,7 @@
               "type": {
                 "text": "HTMLDivElement | null"
               },
-              "description": "Layout grid container holding stats cards.",
+              "privacy": "public",
               "default": "null"
             },
             {
@@ -1374,7 +1692,7 @@
               "type": {
                 "text": "HTMLSpanElement | null"
               },
-              "description": "Element displaying pixel size.",
+              "privacy": "public",
               "default": "null"
             },
             {
@@ -1383,7 +1701,7 @@
               "type": {
                 "text": "HTMLSpanElement | null"
               },
-              "description": "Badge displaying pixel size detection mode.",
+              "privacy": "public",
               "default": "null"
             },
             {
@@ -1392,12 +1710,45 @@
               "type": {
                 "text": "HTMLSpanElement | null"
               },
-              "description": "Element displaying output grid size dimensions.",
+              "privacy": "public",
               "default": "null"
             },
             {
               "kind": "method",
+              "name": "setLogs",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "stats",
+                  "type": {
+                    "text": "SnapperStats"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "clear",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
               "name": "addEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -1408,7 +1759,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -1421,12 +1772,17 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "removeEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -1437,7 +1793,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -1450,71 +1806,116 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttributeOrNull",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K] | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setAttributeValue",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "AttributeMap[K]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttribute",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryElementOrNull",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "selector",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "queryElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "requireElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
                 }
               },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "queryDocumentElement",
               "parameters": [
                 {
-                  "name": "id",
+                  "name": "selector",
                   "type": {
                     "text": "string"
                   }
@@ -1526,20 +1927,19 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "emit",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -1551,20 +1951,19 @@
                   "name": "detail",
                   "optional": true,
                   "type": {
-                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : undefined"
+                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : any"
                   }
                 }
               ],
-              "description": "Dispatches a type-safe custom event from this component.",
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             }
           ],
           "superclass": {
             "name": "BaseElement",
-            "module": "/components/base-element.js"
+            "module": "/components/base-element.ts"
           },
           "tagName": "logs-panel",
           "customElement": true
@@ -1576,7 +1975,7 @@
           "name": "LogsPanel",
           "declaration": {
             "name": "LogsPanel",
-            "module": "components/logs-panel.js"
+            "module": "components/logs-panel.ts"
           }
         },
         {
@@ -1584,14 +1983,14 @@
           "name": "logs-panel",
           "declaration": {
             "name": "LogsPanel",
-            "module": "components/logs-panel.js"
+            "module": "components/logs-panel.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "components/palette-control.js",
+      "path": "components/palette-control.ts",
       "declarations": [
         {
           "kind": "class",
@@ -1600,20 +1999,11 @@
           "members": [
             {
               "kind": "field",
-              "name": "value",
-              "description": "The current color count value of the slider.",
-              "type": {
-                "text": "number"
-              },
-              "readonly": true
-            },
-            {
-              "kind": "field",
               "name": "input",
               "type": {
                 "text": "HTMLInputElement | null"
               },
-              "description": "Color count selection range slider input.",
+              "privacy": "public",
               "default": "null"
             },
             {
@@ -1622,12 +2012,26 @@
               "type": {
                 "text": "HTMLSpanElement | null"
               },
-              "description": "Numeric color count text label display.",
+              "privacy": "public",
               "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "public",
+              "readonly": true
             },
             {
               "kind": "method",
               "name": "addEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -1638,7 +2042,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -1651,12 +2055,17 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "removeEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -1667,7 +2076,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -1680,71 +2089,116 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttributeOrNull",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K] | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setAttributeValue",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "AttributeMap[K]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttribute",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryElementOrNull",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "selector",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "queryElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "requireElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
                 }
               },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "queryDocumentElement",
               "parameters": [
                 {
-                  "name": "id",
+                  "name": "selector",
                   "type": {
                     "text": "string"
                   }
@@ -1756,20 +2210,19 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "emit",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -1781,29 +2234,19 @@
                   "name": "detail",
                   "optional": true,
                   "type": {
-                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : undefined"
+                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : any"
                   }
                 }
               ],
-              "description": "Dispatches a type-safe custom event from this component.",
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
-            }
-          ],
-          "events": [
-            {
-              "type": {
-                "text": "CustomEvent<{value: number}>"
-              },
-              "description": "Dispatched when the range color slider value updates.",
-              "name": "change"
             }
           ],
           "superclass": {
             "name": "BaseElement",
-            "module": "/components/base-element.js"
+            "module": "/components/base-element.ts"
           },
           "tagName": "palette-control",
           "customElement": true
@@ -1815,7 +2258,7 @@
           "name": "PaletteControl",
           "declaration": {
             "name": "PaletteControl",
-            "module": "components/palette-control.js"
+            "module": "components/palette-control.ts"
           }
         },
         {
@@ -1823,14 +2266,14 @@
           "name": "palette-control",
           "declaration": {
             "name": "PaletteControl",
-            "module": "components/palette-control.js"
+            "module": "components/palette-control.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "components/pixel-override-control.js",
+      "path": "components/pixel-override-control.ts",
       "declarations": [
         {
           "kind": "class",
@@ -1839,20 +2282,11 @@
           "members": [
             {
               "kind": "field",
-              "name": "value",
-              "description": "Returns the grid cell override value, or undefined if auto-detection is active.",
-              "type": {
-                "text": "number | undefined"
-              },
-              "readonly": true
-            },
-            {
-              "kind": "field",
               "name": "autoCheckbox",
               "type": {
                 "text": "HTMLInputElement | null"
               },
-              "description": "Checkbox to toggle auto-detection mode.",
+              "privacy": "public",
               "default": "null"
             },
             {
@@ -1861,12 +2295,26 @@
               "type": {
                 "text": "HTMLInputElement | null"
               },
-              "description": "Numerical input to force manual grid size override.",
+              "privacy": "public",
               "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number | undefined"
+              },
+              "privacy": "public",
+              "readonly": true
             },
             {
               "kind": "method",
               "name": "addEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -1877,7 +2325,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -1890,12 +2338,17 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "removeEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -1906,7 +2359,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -1919,71 +2372,116 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttributeOrNull",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K] | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setAttributeValue",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "AttributeMap[K]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttribute",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryElementOrNull",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "selector",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "queryElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "requireElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
                 }
               },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "queryDocumentElement",
               "parameters": [
                 {
-                  "name": "id",
+                  "name": "selector",
                   "type": {
                     "text": "string"
                   }
@@ -1995,20 +2493,19 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "emit",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -2020,29 +2517,19 @@
                   "name": "detail",
                   "optional": true,
                   "type": {
-                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : undefined"
+                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : any"
                   }
                 }
               ],
-              "description": "Dispatches a type-safe custom event from this component.",
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
-            }
-          ],
-          "events": [
-            {
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "Dispatched when the manual override option triggers or changes.",
-              "name": "change"
             }
           ],
           "superclass": {
             "name": "BaseElement",
-            "module": "/components/base-element.js"
+            "module": "/components/base-element.ts"
           },
           "tagName": "pixel-override-control",
           "customElement": true
@@ -2054,7 +2541,7 @@
           "name": "PixelOverrideControl",
           "declaration": {
             "name": "PixelOverrideControl",
-            "module": "components/pixel-override-control.js"
+            "module": "components/pixel-override-control.ts"
           }
         },
         {
@@ -2062,14 +2549,14 @@
           "name": "pixel-override-control",
           "declaration": {
             "name": "PixelOverrideControl",
-            "module": "components/pixel-override-control.js"
+            "module": "components/pixel-override-control.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "components/pixel-snapper-app.js",
+      "path": "components/pixel-snapper-app.ts",
       "declarations": [
         {
           "kind": "class",
@@ -2077,8 +2564,59 @@
           "name": "PixelSnapperApp",
           "members": [
             {
+              "kind": "field",
+              "name": "controlsPanel",
+              "type": {
+                "text": "ControlsPanel | null"
+              },
+              "privacy": "public",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "originalViewport",
+              "type": {
+                "text": "ImageViewport | null"
+              },
+              "privacy": "public",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "resultViewport",
+              "type": {
+                "text": "ImageViewport | null"
+              },
+              "privacy": "public",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "sourceBytes",
+              "type": {
+                "text": "Uint8Array | null"
+              },
+              "privacy": "public",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "resultBytes",
+              "type": {
+                "text": "Uint8Array | null"
+              },
+              "privacy": "public",
+              "default": "null"
+            },
+            {
               "kind": "method",
               "name": "loadFile",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              },
               "parameters": [
                 {
                   "name": "file",
@@ -2086,18 +2624,12 @@
                     "text": "File"
                   }
                 }
-              ],
-              "description": "Reads the selected file buffer, renders the preview, and updates visual controls.",
-              "return": {
-                "type": {
-                  "text": "Promise<void>"
-                }
-              }
+              ]
             },
             {
               "kind": "method",
               "name": "processImage",
-              "description": "Executes the WASM pixel snapped quantization algorithm.",
+              "privacy": "public",
               "return": {
                 "type": {
                   "text": "Promise<void>"
@@ -2107,56 +2639,21 @@
             {
               "kind": "method",
               "name": "downloadResult",
-              "description": "Triggers the processed image file download saving step."
-            },
-            {
-              "kind": "field",
-              "name": "controlsPanel",
-              "type": {
-                "text": "ControlsPanel | null"
-              },
-              "description": "Sidebar controls panel wrapper.",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "originalViewport",
-              "type": {
-                "text": "ImageViewport | null"
-              },
-              "description": "Viewport displaying the original uploaded source image.",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "resultViewport",
-              "type": {
-                "text": "ImageViewport | null"
-              },
-              "description": "Viewport displaying the snapped, quantized result image.",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "sourceBytes",
-              "type": {
-                "text": "Uint8Array | null"
-              },
-              "description": "Original uploaded source image raw bytes.",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "resultBytes",
-              "type": {
-                "text": "Uint8Array | null"
-              },
-              "description": "Snapped result image raw bytes.",
-              "default": "null"
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
             },
             {
               "kind": "method",
               "name": "addEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -2167,7 +2664,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -2180,12 +2677,17 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "removeEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -2196,7 +2698,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -2209,71 +2711,116 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttributeOrNull",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K] | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setAttributeValue",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "AttributeMap[K]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttribute",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryElementOrNull",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "selector",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "queryElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "requireElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
                 }
               },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "queryDocumentElement",
               "parameters": [
                 {
-                  "name": "id",
+                  "name": "selector",
                   "type": {
                     "text": "string"
                   }
@@ -2285,20 +2832,19 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "emit",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -2310,20 +2856,19 @@
                   "name": "detail",
                   "optional": true,
                   "type": {
-                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : undefined"
+                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : any"
                   }
                 }
               ],
-              "description": "Dispatches a type-safe custom event from this component.",
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             }
           ],
           "superclass": {
             "name": "BaseElement",
-            "module": "/components/base-element.js"
+            "module": "/components/base-element.ts"
           },
           "tagName": "pixel-snapper-app",
           "customElement": true
@@ -2335,7 +2880,7 @@
           "name": "PixelSnapperApp",
           "declaration": {
             "name": "PixelSnapperApp",
-            "module": "components/pixel-snapper-app.js"
+            "module": "components/pixel-snapper-app.ts"
           }
         },
         {
@@ -2343,28 +2888,51 @@
           "name": "pixel-snapper-app",
           "declaration": {
             "name": "PixelSnapperApp",
-            "module": "components/pixel-snapper-app.js"
+            "module": "components/pixel-snapper-app.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "components/status-bar.js",
+      "path": "components/status-bar.ts",
       "declarations": [
+        {
+          "kind": "variable",
+          "name": "StatusBarState",
+          "type": {
+            "text": "{\n  Idle: \"Idle\",\n  Processing: \"Processing\",\n  Done: \"Done\",\n  Error: \"Error\",\n}"
+          },
+          "default": "{ Idle: \"Idle\", Processing: \"Processing\", Done: \"Done\", Error: \"Error\", }"
+        },
         {
           "kind": "class",
           "description": "",
           "name": "StatusBar",
           "members": [
             {
+              "kind": "field",
+              "name": "textSpan",
+              "type": {
+                "text": "HTMLSpanElement | null"
+              },
+              "privacy": "public",
+              "default": "null"
+            },
+            {
               "kind": "method",
               "name": "setStatus",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "state",
                   "type": {
-                    "text": "\"idle\" | \"processing\" | \"done\" | \"error\""
+                    "text": "StatusBarState"
                   }
                 },
                 {
@@ -2373,21 +2941,16 @@
                     "text": "string"
                   }
                 }
-              ],
-              "description": "Adjusts the visual status indicator state and updates the feedback label."
-            },
-            {
-              "kind": "field",
-              "name": "textSpan",
-              "type": {
-                "text": "HTMLSpanElement | null"
-              },
-              "description": "Dynamic text span reporting status feedback messages.",
-              "default": "null"
+              ]
             },
             {
               "kind": "method",
               "name": "addEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -2398,7 +2961,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -2411,12 +2974,17 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "removeEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -2427,7 +2995,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -2440,71 +3008,116 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttributeOrNull",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K] | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setAttributeValue",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "AttributeMap[K]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttribute",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryElementOrNull",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "selector",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "queryElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "requireElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
                 }
               },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "queryDocumentElement",
               "parameters": [
                 {
-                  "name": "id",
+                  "name": "selector",
                   "type": {
                     "text": "string"
                   }
@@ -2516,20 +3129,19 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "emit",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -2541,20 +3153,19 @@
                   "name": "detail",
                   "optional": true,
                   "type": {
-                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : undefined"
+                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : any"
                   }
                 }
               ],
-              "description": "Dispatches a type-safe custom event from this component.",
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             }
           ],
           "superclass": {
             "name": "BaseElement",
-            "module": "/components/base-element.js"
+            "module": "/components/base-element.ts"
           },
           "tagName": "status-bar",
           "customElement": true
@@ -2563,10 +3174,18 @@
       "exports": [
         {
           "kind": "js",
+          "name": "StatusBarState",
+          "declaration": {
+            "name": "StatusBarState",
+            "module": "components/status-bar.ts"
+          }
+        },
+        {
+          "kind": "js",
           "name": "StatusBar",
           "declaration": {
             "name": "StatusBar",
-            "module": "components/status-bar.js"
+            "module": "components/status-bar.ts"
           }
         },
         {
@@ -2574,14 +3193,14 @@
           "name": "status-bar",
           "declaration": {
             "name": "StatusBar",
-            "module": "components/status-bar.js"
+            "module": "components/status-bar.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "components/zoom-controls.js",
+      "path": "components/zoom-controls.ts",
       "declarations": [
         {
           "kind": "class",
@@ -2589,41 +3208,12 @@
           "name": "ZoomControls",
           "members": [
             {
-              "kind": "method",
-              "name": "updateDisplay",
-              "description": "Refreshes the percentage status label and dispatches a zoom change event."
-            },
-            {
-              "kind": "method",
-              "name": "stepIn",
-              "description": "Steps the zoom level up."
-            },
-            {
-              "kind": "method",
-              "name": "stepOut",
-              "description": "Steps the zoom level down."
-            },
-            {
-              "kind": "method",
-              "name": "reset",
-              "description": "Resets the zoom level to 100%."
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "description": "Returns the current zoom level.",
-              "type": {
-                "text": "number"
-              },
-              "readonly": true
-            },
-            {
               "kind": "field",
               "name": "btnOut",
               "type": {
                 "text": "HTMLButtonElement | null"
               },
-              "description": "Button to step zoom down.",
+              "privacy": "public",
               "default": "null"
             },
             {
@@ -2632,7 +3222,7 @@
               "type": {
                 "text": "HTMLButtonElement | null"
               },
-              "description": "Button to step zoom up.",
+              "privacy": "public",
               "default": "null"
             },
             {
@@ -2641,7 +3231,7 @@
               "type": {
                 "text": "HTMLButtonElement | null"
               },
-              "description": "Button to reset zoom to 100%.",
+              "privacy": "public",
               "default": "null"
             },
             {
@@ -2650,7 +3240,7 @@
               "type": {
                 "text": "HTMLSpanElement | null"
               },
-              "description": "Numeric text label showing current zoom percentage.",
+              "privacy": "public",
               "default": "null"
             },
             {
@@ -2659,12 +3249,66 @@
               "type": {
                 "text": "number"
               },
-              "description": "Current zoom factor (1 = 100%).",
+              "privacy": "public",
               "default": "1"
             },
             {
               "kind": "method",
+              "name": "updateDisplay",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "stepIn",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "stepOut",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reset",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "public",
+              "readonly": true
+            },
+            {
+              "kind": "method",
               "name": "addEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -2675,7 +3319,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -2688,12 +3332,17 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "removeEventListener",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -2704,7 +3353,7 @@
                 {
                   "name": "listener",
                   "type": {
-                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                    "text": "(this: HTMLElement, ev: EventMap[K]) => any"
                   }
                 },
                 {
@@ -2717,71 +3366,116 @@
               ],
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttributeOrNull",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K] | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setAttributeValue",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "AttributeMap[K]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryAttribute",
+              "return": {
+                "type": {
+                  "text": "AttributeMap[K]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "qualifiedName",
+                  "type": {
+                    "text": "K"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryElementOrNull",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "selector",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "queryElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "requireElement",
-              "parameters": [
-                {
-                  "name": "selector",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "Type",
-                  "type": {
-                    "text": "new () => T"
-                  }
-                }
-              ],
-              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
               "return": {
                 "type": {
                   "text": "T"
                 }
               },
-              "inheritedFrom": {
-                "name": "BaseElement",
-                "module": "components/base-element.js"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "queryDocumentElement",
               "parameters": [
                 {
-                  "name": "id",
+                  "name": "selector",
                   "type": {
                     "text": "string"
                   }
@@ -2793,20 +3487,19 @@
                   }
                 }
               ],
-              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
-              "return": {
-                "type": {
-                  "text": "T | null"
-                }
-              },
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
             },
             {
               "kind": "method",
               "name": "emit",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
                   "name": "type",
@@ -2818,29 +3511,19 @@
                   "name": "detail",
                   "optional": true,
                   "type": {
-                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : undefined"
+                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : any"
                   }
                 }
               ],
-              "description": "Dispatches a type-safe custom event from this component.",
               "inheritedFrom": {
                 "name": "BaseElement",
-                "module": "components/base-element.js"
+                "module": "components/base-element.ts"
               }
-            }
-          ],
-          "events": [
-            {
-              "type": {
-                "text": "CustomEvent<{zoom: number}>"
-              },
-              "description": "Dispatched when the zoom level is adjusted.",
-              "name": "zoomchange"
             }
           ],
           "superclass": {
             "name": "BaseElement",
-            "module": "/components/base-element.js"
+            "module": "/components/base-element.ts"
           },
           "tagName": "zoom-controls",
           "customElement": true
@@ -2852,7 +3535,7 @@
           "name": "ZoomControls",
           "declaration": {
             "name": "ZoomControls",
-            "module": "components/zoom-controls.js"
+            "module": "components/zoom-controls.ts"
           }
         },
         {
@@ -2860,7 +3543,7 @@
           "name": "zoom-controls",
           "declaration": {
             "name": "ZoomControls",
-            "module": "components/zoom-controls.js"
+            "module": "components/zoom-controls.ts"
           }
         }
       ]
