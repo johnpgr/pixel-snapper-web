@@ -22,17 +22,11 @@ export class ZoomControls extends BaseElement<ZoomControlsEventMap> {
     this.btnReset = this.queryElement(".zoom-reset-btn", HTMLButtonElement);
     this.display = this.queryElement(".zoom-value", HTMLSpanElement);
 
-    this.btnOut.addEventListener("click", () => {
-      this.stepOut();
-    });
+    this.btnOut.addEventListener("click", this.stepOut.bind(this));
 
-    this.btnIn.addEventListener("click", () => {
-      this.stepIn();
-    });
+    this.btnIn.addEventListener("click", this.stepIn.bind(this));
 
-    this.btnReset.addEventListener("click", () => {
-      this.reset();
-    });
+    this.btnReset.addEventListener("click", this.reset.bind(this));
   }
 
   public updateDisplay(): void {

@@ -38,21 +38,17 @@ export class ControlsPanel extends BaseElement<ControlsPanelEventMap> {
       this.emit("fileselect", { file: ev.detail.file });
     });
 
-    this.processBtn.addEventListener("click", () => {
-      this.emit("process");
-    });
+    this.processBtn.addEventListener("click", this.emit.bind(this, "process"));
 
-    this.downloadBtn.addEventListener("click", () => {
-      this.emit("download");
-    });
+    this.downloadBtn.addEventListener("click", this.emit.bind(this, "download"));
   }
 
   public get kColors(): number {
     return this.palette ? this.palette.value : 16;
   }
 
-  public get pixelSizeOverride(): number | undefined {
-    return this.pixelOverride ? this.pixelOverride.value : undefined;
+  public get pixelSizeOverride(): number | null {
+    return this.pixelOverride.value;
   }
 
   public setStatus(state: StatusBarState, message: string): void {

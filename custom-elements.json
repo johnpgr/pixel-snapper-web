@@ -1345,26 +1345,24 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "A viewport component that wraps zoom controls and an image preview.",
           "name": "ImageViewport",
           "members": [
             {
               "kind": "field",
               "name": "zoomControls",
               "type": {
-                "text": "ZoomControls | null"
+                "text": "ZoomControls"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "field",
               "name": "preview",
               "type": {
-                "text": "ImagePreview | null"
+                "text": "ImagePreview"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "method",
@@ -1632,6 +1630,15 @@
               }
             }
           ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"original\"|\"result\""
+              },
+              "description": "The type of image displayed in the viewport.",
+              "name": "type"
+            }
+          ],
           "superclass": {
             "name": "BaseElement",
             "module": "/components/base-element.ts"
@@ -1672,46 +1679,41 @@
               "kind": "field",
               "name": "placeholder",
               "type": {
-                "text": "HTMLDivElement | null"
+                "text": "HTMLDivElement"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "field",
               "name": "grid",
               "type": {
-                "text": "HTMLDivElement | null"
+                "text": "HTMLDivElement"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "field",
               "name": "pixelSizeValue",
               "type": {
-                "text": "HTMLSpanElement | null"
+                "text": "HTMLSpanElement"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "field",
               "name": "pixelSizeBadge",
               "type": {
-                "text": "HTMLSpanElement | null"
+                "text": "HTMLSpanElement"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "field",
               "name": "outputSizeValue",
               "type": {
-                "text": "HTMLSpanElement | null"
+                "text": "HTMLSpanElement"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "method",
@@ -2001,19 +2003,17 @@
               "kind": "field",
               "name": "input",
               "type": {
-                "text": "HTMLInputElement | null"
+                "text": "HTMLInputElement"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "field",
               "name": "display",
               "type": {
-                "text": "HTMLSpanElement | null"
+                "text": "HTMLSpanElement"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "field",
@@ -2284,25 +2284,23 @@
               "kind": "field",
               "name": "autoCheckbox",
               "type": {
-                "text": "HTMLInputElement | null"
+                "text": "HTMLInputElement"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "field",
               "name": "sizeInput",
               "type": {
-                "text": "HTMLInputElement | null"
+                "text": "HTMLInputElement"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "field",
               "name": "value",
               "type": {
-                "text": "number | undefined"
+                "text": "number | null"
               },
               "privacy": "public",
               "readonly": true
@@ -2567,28 +2565,25 @@
               "kind": "field",
               "name": "controlsPanel",
               "type": {
-                "text": "ControlsPanel | null"
+                "text": "ControlsPanel"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "field",
               "name": "originalViewport",
               "type": {
-                "text": "ImageViewport | null"
+                "text": "ImageViewport"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "field",
               "name": "resultViewport",
               "type": {
-                "text": "ImageViewport | null"
+                "text": "ImageViewport"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "field",
@@ -3211,37 +3206,33 @@
               "kind": "field",
               "name": "btnOut",
               "type": {
-                "text": "HTMLButtonElement | null"
+                "text": "HTMLButtonElement"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "field",
               "name": "btnIn",
               "type": {
-                "text": "HTMLButtonElement | null"
+                "text": "HTMLButtonElement"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "field",
               "name": "btnReset",
               "type": {
-                "text": "HTMLButtonElement | null"
+                "text": "HTMLButtonElement"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "field",
               "name": "display",
               "type": {
-                "text": "HTMLSpanElement | null"
+                "text": "HTMLSpanElement"
               },
-              "privacy": "public",
-              "default": "null"
+              "privacy": "public"
             },
             {
               "kind": "field",

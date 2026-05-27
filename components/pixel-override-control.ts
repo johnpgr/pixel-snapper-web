@@ -24,9 +24,7 @@ export class PixelOverrideControl extends BaseElement<PixelOverrideControlEventM
       this.emit("change");
     });
 
-    this.sizeInput.addEventListener("input", () => {
-      this.emit("change");
-    });
+    this.sizeInput.addEventListener("input", this.emit.bind(this, "change"));
   }
 
   public get value(): number | null {

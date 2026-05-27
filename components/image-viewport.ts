@@ -4,7 +4,17 @@ import { ImagePreview } from "./image-preview.ts";
 import type { Result } from "../lib/result.ts";
 import type { ImageSize } from "../lib/canvas.ts";
 
-export class ImageViewport extends BaseElement {
+export interface ImageViewportAttributeMap {
+  type: "original" | "result";
+}
+
+/**
+ * A viewport component that wraps zoom controls and an image preview.
+ *
+ * @tagName image-viewport
+ * @attribute {"original"|"result"} type - The type of image displayed in the viewport.
+ */
+export class ImageViewport extends BaseElement<HTMLElementEventMap, ImageViewportAttributeMap> {
   public zoomControls!: ZoomControls;
   public preview!: ImagePreview;
 
@@ -48,3 +58,9 @@ export class ImageViewport extends BaseElement {
 }
 
 customElements.define("image-viewport", ImageViewport);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "image-viewport": ImageViewport;
+  }
+}
