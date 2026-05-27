@@ -182,6 +182,12 @@
           "members": [
             {
               "kind": "field",
+              "name": "template",
+              "static": true,
+              "default": "html` <div> <palette-control colors=9></palette-control> </div> `"
+            },
+            {
+              "kind": "field",
               "name": "kColors",
               "description": "Retrieves the current palette colors range value.",
               "type": {
@@ -249,6 +255,24 @@
               "description": "Resets the file selection back to empty."
             },
             {
+              "kind": "method",
+              "name": "setLogs",
+              "parameters": [
+                {
+                  "name": "stats",
+                  "type": {
+                    "text": "SnapperStats"
+                  }
+                }
+              ],
+              "description": "Updates the execution logs display in the sidebar."
+            },
+            {
+              "kind": "method",
+              "name": "clearLogs",
+              "description": "Resets the execution logs back to empty state."
+            },
+            {
               "kind": "field",
               "name": "dropZone",
               "type": {
@@ -300,6 +324,15 @@
                 "text": "HTMLButtonElement | null"
               },
               "description": "Action button to trigger snapped image PNG download.",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "logsPanel",
+              "type": {
+                "text": "LogsPanel | null"
+              },
+              "description": "Logs panel component displaying execution statistics.",
               "default": "null"
             },
             {
@@ -1292,6 +1325,272 @@
     },
     {
       "kind": "javascript-module",
+      "path": "components/logs-panel.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LogsPanel",
+          "members": [
+            {
+              "kind": "method",
+              "name": "setLogs",
+              "parameters": [
+                {
+                  "name": "stats",
+                  "type": {
+                    "text": "SnapperStats"
+                  }
+                }
+              ],
+              "description": "Updates the execution logs display in the sidebar."
+            },
+            {
+              "kind": "method",
+              "name": "clear",
+              "description": "Resets the execution logs back to empty state."
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "HTMLDivElement | null"
+              },
+              "description": "Placeholder text shown when no execution logs exist.",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "grid",
+              "type": {
+                "text": "HTMLDivElement | null"
+              },
+              "description": "Layout grid container holding stats cards.",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "pixelSizeValue",
+              "type": {
+                "text": "HTMLSpanElement | null"
+              },
+              "description": "Element displaying pixel size.",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "pixelSizeBadge",
+              "type": {
+                "text": "HTMLSpanElement | null"
+              },
+              "description": "Badge displaying pixel size detection mode.",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "outputSizeValue",
+              "type": {
+                "text": "HTMLSpanElement | null"
+              },
+              "description": "Element displaying output grid size dimensions.",
+              "default": "null"
+            },
+            {
+              "kind": "method",
+              "name": "addEventListener",
+              "parameters": [
+                {
+                  "name": "type",
+                  "type": {
+                    "text": "K"
+                  }
+                },
+                {
+                  "name": "listener",
+                  "type": {
+                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                  }
+                },
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "boolean | AddEventListenerOptions"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.js"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "removeEventListener",
+              "parameters": [
+                {
+                  "name": "type",
+                  "type": {
+                    "text": "K"
+                  }
+                },
+                {
+                  "name": "listener",
+                  "type": {
+                    "text": "((this: BaseElement, ev: EventMap[K]) => any) | EventListenerObject"
+                  }
+                },
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "boolean | EventListenerOptions"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.js"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryElement",
+              "parameters": [
+                {
+                  "name": "selector",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                }
+              ],
+              "description": "Queries a child element inside this component, asserting its type.\r\nReturns null if absent or type mismatching.",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.js"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "requireElement",
+              "parameters": [
+                {
+                  "name": "selector",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                }
+              ],
+              "description": "Queries a required child element inside this component, asserting its type.\r\nThrows an error if absent or type mismatching.",
+              "return": {
+                "type": {
+                  "text": "T"
+                }
+              },
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.js"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queryDocumentElement",
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                }
+              ],
+              "description": "Queries a global element in the document by ID, asserting its type.\r\nReturns null if absent or type mismatching.",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.js"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "parameters": [
+                {
+                  "name": "type",
+                  "type": {
+                    "text": "K"
+                  }
+                },
+                {
+                  "name": "detail",
+                  "optional": true,
+                  "type": {
+                    "text": "EventMap[K] extends CustomEvent<infer D> ? D : undefined"
+                  }
+                }
+              ],
+              "description": "Dispatches a type-safe custom event from this component.",
+              "inheritedFrom": {
+                "name": "BaseElement",
+                "module": "components/base-element.js"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "BaseElement",
+            "module": "/components/base-element.js"
+          },
+          "tagName": "logs-panel",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LogsPanel",
+          "declaration": {
+            "name": "LogsPanel",
+            "module": "components/logs-panel.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "logs-panel",
+          "declaration": {
+            "name": "LogsPanel",
+            "module": "components/logs-panel.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "components/palette-control.js",
       "declarations": [
         {
@@ -1302,7 +1601,7 @@
             {
               "kind": "field",
               "name": "value",
-              "description": "Retrieves the current color selection from the range slider.",
+              "description": "The current color count value of the slider.",
               "type": {
                 "text": "number"
               },

@@ -9,6 +9,10 @@ import { BaseElement } from "./base-element.js";
 /**
  * @extends {BaseElement<PaletteControlEventMap>}
  * @fires {CustomEvent<{value: number}>} change - Dispatched when the range color slider value updates.
+ * 
+ * @property {HTMLInputElement | null} input - Color count selection range slider input.
+ * @property {HTMLSpanElement | null} display - Numeric color count text label display.
+ * @property {number} value - The current color count value of the slider.
  */
 export class PaletteControl extends BaseElement {
   constructor() {
@@ -26,15 +30,15 @@ export class PaletteControl extends BaseElement {
   }
 
   connectedCallback() {
-    const input = this.queryElement('input[type="range"]', HTMLInputElement);
-    const display = this.queryElement('.field-value', HTMLSpanElement);
-    this.input = input;
-    this.display = display;
+    this.input = this.queryElement('input[type="range"]', HTMLInputElement);
+    this.display = this.queryElement('.field-value', HTMLSpanElement);
+
+    const input = this.input;
 
     if (input) {
       input.addEventListener("input", () => {
-        if (display) {
-          display.textContent = input.value;
+        if (this.display) {
+          this.display.textContent = input.value;
         }
         this.emit("change", { value: this.value });
       });
