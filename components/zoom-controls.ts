@@ -5,7 +5,7 @@ export interface ZoomControlsEventMap extends HTMLElementEventMap {
   zoomchange: CustomEvent<{ zoom: number }>;
 }
 
-export class ZoomControls extends BaseElement<ZoomControlsEventMap> {
+export class ZoomControls extends BaseElement<{}, ZoomControlsEventMap> {
   public btnOut!: HTMLButtonElement;
   public btnIn!: HTMLButtonElement;
   public btnReset!: HTMLButtonElement;

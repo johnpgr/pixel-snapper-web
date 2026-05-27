@@ -5,7 +5,7 @@ export interface DropZoneEventMap extends HTMLElementEventMap {
   fileselect: CustomEvent<{ file: File }>;
 }
 
-export class DropZone extends BaseElement<DropZoneEventMap> {
+export class DropZone extends BaseElement<{}, DropZoneEventMap> {
   public input!: HTMLInputElement;
   public label!: HTMLSpanElement;
 

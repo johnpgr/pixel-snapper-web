@@ -1,6 +1,6 @@
 export class BaseElement<
-  EventMap extends HTMLElementEventMap = HTMLElementEventMap,
-  AttributeMap = Record<string, string>
+  AttributeMap = Record<string, string>,
+  EventMap extends HTMLElementEventMap = HTMLElementEventMap
 > extends HTMLElement {
   override addEventListener<K extends keyof EventMap>(
     type: K,

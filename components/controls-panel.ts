@@ -12,7 +12,7 @@ export interface ControlsPanelEventMap extends HTMLElementEventMap {
   download: CustomEvent<void>;
 }
 
-export class ControlsPanel extends BaseElement<ControlsPanelEventMap> {
+export class ControlsPanel extends BaseElement<{}, ControlsPanelEventMap> {
   public dropZone!: DropZone;
   public palette!: PaletteControl;
   public pixelOverride!: PixelOverrideControl;

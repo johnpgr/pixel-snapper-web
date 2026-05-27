@@ -2896,7 +2896,7 @@
           "kind": "variable",
           "name": "StatusBarState",
           "type": {
-            "text": "{\n  Idle: \"Idle\",\n  Processing: \"Processing\",\n  Done: \"Done\",\n  Error: \"Error\",\n}"
+            "text": "{\r\n  Idle: \"Idle\",\r\n  Processing: \"Processing\",\r\n  Done: \"Done\",\r\n  Error: \"Error\",\r\n}"
           },
           "default": "{ Idle: \"Idle\", Processing: \"Processing\", Done: \"Done\", Error: \"Error\", }"
         },

@@ -14,7 +14,7 @@ export interface ImagePreviewAttributes {
  * @tagName image-preview
  * @attribute {string} info-target - The selector/ID of the target element to display image dimensions.
  */
-export class ImagePreview extends BaseElement<HTMLElementEventMap, ImagePreviewAttributes> {
+export class ImagePreview extends BaseElement<ImagePreviewAttributes, HTMLElementEventMap> {
   public canvas!: HTMLCanvasElement;
   public emptyState!: HTMLElement;
   public infoDisplay!: HTMLSpanElement;

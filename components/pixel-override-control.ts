@@ -4,7 +4,7 @@ export interface PixelOverrideControlEventMap extends HTMLElementEventMap {
   change: CustomEvent<void>;
 }
 
-export class PixelOverrideControl extends BaseElement<PixelOverrideControlEventMap> {
+export class PixelOverrideControl extends BaseElement<{}, PixelOverrideControlEventMap> {
   public autoCheckbox!: HTMLInputElement;
   public sizeInput!: HTMLInputElement;
 

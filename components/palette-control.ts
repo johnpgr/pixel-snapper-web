@@ -4,7 +4,7 @@ export interface PaletteControlEventMap extends HTMLElementEventMap {
   change: CustomEvent<{ value: number }>;
 }
 
-export class PaletteControl extends BaseElement<PaletteControlEventMap> {
+export class PaletteControl extends BaseElement<{}, PaletteControlEventMap> {
   public input!: HTMLInputElement;
   public display!: HTMLSpanElement;
 

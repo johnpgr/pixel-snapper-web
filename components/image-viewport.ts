@@ -14,7 +14,7 @@ export interface ImageViewportAttributeMap {
  * @tagName image-viewport
  * @attribute {"original"|"result"} type - The type of image displayed in the viewport.
  */
-export class ImageViewport extends BaseElement<HTMLElementEventMap, ImageViewportAttributeMap> {
+export class ImageViewport extends BaseElement<ImageViewportAttributeMap, HTMLElementEventMap> {
   public zoomControls!: ZoomControls;
   public preview!: ImagePreview;
 
@@ -30,7 +30,7 @@ export class ImageViewport extends BaseElement<HTMLElementEventMap, ImageViewpor
       this.applyZoom(ev.detail.zoom);
     });
 
-    this.preview.addEventListener("wheel", (ev: WheelEvent) => {
+    this.preview.addEventListener("wheel", (ev) => {
       if (!ev.ctrlKey && !ev.metaKey) return;
       ev.preventDefault();
 
@@ -58,9 +58,3 @@ export class ImageViewport extends BaseElement<HTMLElementEventMap, ImageViewpor
 }
 
 customElements.define("image-viewport", ImageViewport);
-
-declare global {
-  interface HTMLElementTagNameMap {
-    "image-viewport": ImageViewport;
-  }
-}
