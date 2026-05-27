@@ -458,6 +458,15 @@
               }
             },
             {
+              "kind": "field",
+              "name": "logsPanel",
+              "type": {
+                "text": "LogsPanel | null"
+              },
+              "description": "Logs panel component displaying execution statistics.",
+              "default": "null"
+            },
+            {
               "kind": "method",
               "name": "addEventListener",
               "return": {
