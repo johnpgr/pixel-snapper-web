@@ -354,7 +354,7 @@
               "kind": "field",
               "name": "pixelSizeOverride",
               "type": {
-                "text": "number | undefined"
+                "text": "number | null"
               },
               "privacy": "public",
               "readonly": true
@@ -456,16 +456,6 @@
                   "text": "void"
                 }
               }
-            },
-            {
-              "kind": "field",
-              "name": "logsPanel",
-              "type": {
-                "text": "LogsPanel | null"
-              },
-              "description": "Logs panel component displaying execution statistics.",
-              "default": "null"
-=======
             },
             {
               "kind": "method",
@@ -1365,11 +1355,6 @@
                 "text": "ZoomControls"
               },
               "privacy": "public"
-=======
-                "text": "ZoomControls | null"
-              },
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "field",
@@ -1378,57 +1363,6 @@
                 "text": "ImagePreview"
               },
               "privacy": "public"
-            },
-            {
-              "kind": "method",
-              "name": "applyZoom",
-              "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "factor",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "clear",
-              "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "draw",
-              "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "Promise<Result<ImageSize>>"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "bytes",
-                  "type": {
-                    "text": "Uint8Array"
-                  }
-                }
-              ]
-=======
-                "text": "ImagePreview | null"
-              },
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "method",
@@ -1748,11 +1682,6 @@
                 "text": "HTMLDivElement"
               },
               "privacy": "public"
-=======
-                "text": "HTMLDivElement | null"
-              },
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "field",
@@ -1761,11 +1690,6 @@
                 "text": "HTMLDivElement"
               },
               "privacy": "public"
-=======
-                "text": "HTMLDivElement | null"
-              },
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "field",
@@ -1774,11 +1698,6 @@
                 "text": "HTMLSpanElement"
               },
               "privacy": "public"
-=======
-                "text": "HTMLSpanElement | null"
-              },
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "field",
@@ -1787,11 +1706,6 @@
                 "text": "HTMLSpanElement"
               },
               "privacy": "public"
-=======
-                "text": "HTMLSpanElement | null"
-              },
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "field",
@@ -1800,39 +1714,6 @@
                 "text": "HTMLSpanElement"
               },
               "privacy": "public"
-            },
-            {
-              "kind": "method",
-              "name": "setLogs",
-              "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "stats",
-                  "type": {
-                    "text": "SnapperStats"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "clear",
-              "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-=======
-                "text": "HTMLSpanElement | null"
-              },
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "method",
@@ -2125,9 +2006,6 @@
                 "text": "HTMLInputElement"
               },
               "privacy": "public"
-=======
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "field",
@@ -2136,18 +2014,6 @@
                 "text": "HTMLSpanElement"
               },
               "privacy": "public"
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "number"
-              },
-              "privacy": "public",
-              "readonly": true
-=======
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "field",
@@ -2421,9 +2287,6 @@
                 "text": "HTMLInputElement"
               },
               "privacy": "public"
-=======
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "field",
@@ -2438,18 +2301,6 @@
               "name": "value",
               "type": {
                 "text": "number | null"
-              },
-              "privacy": "public",
-              "readonly": true
-=======
-              "privacy": "public",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "number | undefined"
               },
               "privacy": "public",
               "readonly": true
@@ -2717,11 +2568,6 @@
                 "text": "ControlsPanel"
               },
               "privacy": "public"
-=======
-                "text": "ControlsPanel | null"
-              },
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "field",
@@ -2730,11 +2576,6 @@
                 "text": "ImageViewport"
               },
               "privacy": "public"
-=======
-                "text": "ImageViewport | null"
-              },
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "field",
@@ -2743,11 +2584,6 @@
                 "text": "ImageViewport"
               },
               "privacy": "public"
-=======
-                "text": "ImageViewport | null"
-              },
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "field",
@@ -3373,9 +3209,6 @@
                 "text": "HTMLButtonElement"
               },
               "privacy": "public"
-=======
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "field",
@@ -3384,9 +3217,6 @@
                 "text": "HTMLButtonElement"
               },
               "privacy": "public"
-=======
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "field",
@@ -3395,9 +3225,6 @@
                 "text": "HTMLButtonElement"
               },
               "privacy": "public"
-=======
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "field",
@@ -3406,9 +3233,6 @@
                 "text": "HTMLSpanElement"
               },
               "privacy": "public"
-=======
-              "privacy": "public",
-              "default": "null"
             },
             {
               "kind": "field",
