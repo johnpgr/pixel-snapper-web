@@ -30,10 +30,10 @@ export async function initialize(): Promise<Result<void>> {
 export function processImage(
   inputBytes: Uint8Array,
   kColors: number,
-  pixelSizeOverride?: number
+  pixelSizeOverride: number | null = null
 ): Result<SnapperResultData> {
   try {
-    const resultObj: SnapperResult = process_image(inputBytes, kColors, pixelSizeOverride ?? null);
+    const resultObj: SnapperResult = process_image(inputBytes, kColors, pixelSizeOverride);
     const output = resultObj.output_bytes;
     const pixelSize = resultObj.pixel_size;
     const pixelSizeMode = resultObj.pixel_size_mode;

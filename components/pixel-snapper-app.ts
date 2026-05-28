@@ -74,13 +74,13 @@ export class PixelSnapperApp extends BaseElement {
   }
 
   public async processImage(): Promise<void> {
-    if (!this.controlsPanel || !this.originalViewport || !this.resultViewport || !this.sourceBytes) return;
+    if (!this.sourceBytes) return;
 
     const kColors = this.controlsPanel.kColors;
     const pixelSizeOverride = this.controlsPanel.pixelSizeOverride;
+    const isAuto = this.controlsPanel.pixelOverride.autoCheckbox.checked;
 
-
-    if (!Number.isPositiveInteger(pixelSizeOverride)) {
+    if (!isAuto && !Number.isPositiveInteger(pixelSizeOverride)) {
       this.controlsPanel.setStatus(StatusBarState.Error, t("pixelSizeError"));
       return;
     }
