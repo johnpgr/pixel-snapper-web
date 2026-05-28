@@ -32,3 +32,10 @@ export function queryElement<T extends HTMLElement>(
 
   return el;
 }
+
+export function registerStyles(styles: string): void {
+  const styleEl = document.createElement("style");
+  styleEl.textContent = styles;
+  document.head.appendChild(styleEl);
+}
+

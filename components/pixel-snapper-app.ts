@@ -5,8 +5,29 @@ import { ControlsPanel } from "./controls-panel.ts";
 import { ImageViewport } from "./image-viewport.ts";
 import { t } from "../lib/i18n.ts";
 import { StatusBarState } from "./status-bar.ts";
+import { html, css } from "../lib/utils.ts";
 
 export class PixelSnapperApp extends BaseElement {
+  static styles = css`
+    /* ─────────────────────────────────────────────────────────────────────────
+       App layout  (side panel + viewport)
+       ───────────────────────────────────────────────────────────────────────── */
+    pixel-snapper-app {
+      display: grid;
+      grid-template-columns: var(--panel-width) 1fr;
+      overflow: hidden;
+    }
+
+    .viewports-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 16px;
+      overflow: hidden;
+      background: var(--surface-base);
+    }
+  `;
+
   public controlsPanel!: ControlsPanel;
   public originalViewport!: ImageViewport;
   public resultViewport!: ImageViewport;
@@ -17,7 +38,24 @@ export class PixelSnapperApp extends BaseElement {
     super();
   }
 
+  render(): string {
+    return html`
+      <!-- ── Left panel: controls ───────────────────────────────────────── -->
+      <controls-panel data-i18n-aria-label="controlsPanelAriaLabel" aria-label="${t("controlsPanelAriaLabel")}"></controls-panel>
+
+      <!-- ── Right panel: viewports container ───────────────────────────── -->
+      <div class="viewports-container">
+        <!-- Original Image Viewport -->
+        <image-viewport type="original" data-i18n-aria-label="imageViewportAriaLabel" aria-label="${t("imageViewportAriaLabel")}"></image-viewport>
+        <!-- Snapped Result Image Viewport -->
+        <image-viewport type="result" data-i18n-aria-label="imageViewportAriaLabel" aria-label="${t("imageViewportAriaLabel")}"></image-viewport>
+      </div>
+    `;
+  }
+
   async connectedCallback(): Promise<void> {
+    super.connectedCallback();
+
     this.controlsPanel = this.queryElement("controls-panel", ControlsPanel);
     this.originalViewport = this.queryElement('image-viewport[type="original"]', ImageViewport);
     this.resultViewport = this.queryElement('image-viewport[type="result"]', ImageViewport);
@@ -132,3 +170,5 @@ export class PixelSnapperApp extends BaseElement {
 }
 
 customElements.define("pixel-snapper-app", PixelSnapperApp);
+
+
