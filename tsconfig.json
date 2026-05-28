@@ -19,9 +19,9 @@
     "types": [],
 
     // Other Outputs
-    "sourceMap": true,
+    "sourceMap": false,
     "declaration": true,
-    "declarationMap": true,
+    "declarationMap": false,
     "noEmit": false,
 
     // Stricter Typechecking Options
